@@ -1,17 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:nintendo_awards/constants.dart';
 
 class MarioPage extends StatelessWidget {
   const MarioPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    Size size = MediaQuery.of(context).size;
+
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
       child: Container(
-          width: 500,
-          height: 500,
-          color: Colors.blue,
-          child: Image.network(
-              'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/0c2b4cc2-d07d-4fbd-b02e-2080981b29a1/dekkxur-219a5a02-c8dd-4dbd-b7f3-c0f7729380e0.jpg/v1/fill/w_1600,h_900,q_75,strp/rupture_by_t1na_dekkxur-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvMGMyYjRjYzItZDA3ZC00ZmJkLWIwMmUtMjA4MDk4MWIyOWExXC9kZWtreHVyLTIxOWE1YTAyLWM4ZGQtNGRiZC1iN2YzLWMwZjc3MjkzODBlMC5qcGciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ASlSAqFfqT2ESBxjeguGsXoCtfiiIgbpHQxaByRoCB0')),
+        width: size.width,
+        height: size.height * 0.4,
+        color: Colors.blue,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  color: Colors.green,
+                  width: size.width * 0.55,
+                  height: size.height * 0.4,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: size.width * 0.55,
+                        height: size.height * 0.1,
+                        color: Colors.red,
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          "Titulo poooooooooooooo ",
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: size.height * 0.24,
+                          width: size.width * 0.5,
+                          color: Colors.white,
+                          child: Image.network(
+                            'https://i.imgur.com/yuz1Cuu.jpg',
+                            // height: size.height * 0.24, //'url entre comillas'
+                            // width: size.width * 0.5,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  // backgroundColor: Colors.red,
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      nintendoPrimaryColor),
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
