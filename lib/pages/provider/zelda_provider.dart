@@ -4,31 +4,31 @@ import 'dart:collection';
 import 'dart:convert';
 
 class ZeldaProvider {
-  final String apiUrl = 'https://zelda-api.apius.cc/api/';
+  final String apiUrl = 'https://zelda-api.apius.cc/api';
 
-  // Future<List<dynamic>> getMa() async {
-  //   var uri = Uri.parse('$apiUrl/marcas');
-  //   var respuesta = await http.get(uri);
-
-  //   if (respuesta.statusCode == 200) {
-  //     return json.decode(respuesta.body);
-  //   } else {
-  //     return null;
-  //   }
-  //   // if (respuesta.statusCode == 200) {
-  //   //   if (respuesta.body.isNotEmpty) {
-  //   //     return json.decode(respuesta.body);
-  //   //   } else {
-  //   //     return null;
-  //   //   }
-  //   // } else {
-  //   //   return null;
-  //   // }
-  // }
+  Future<LinkedHashMap<String, dynamic>> getAllCharacters() async {
+    var uri = Uri.parse('$apiUrl/characters/');
+    var respuesta = await http.get(uri);
+    print(uri);
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return null;
+    }
+    // if (respuesta.statusCode == 200) {
+    //   if (respuesta.body.isNotEmpty) {
+    //     return json.decode(respuesta.body);
+    //   } else {
+    //     return null;
+    //   }
+    // } else {
+    //   return null;
+    // }
+  }
 
   Future<LinkedHashMap<String, dynamic>> getById(
       String dataset, String nombre, String id) async {
-    var uri = Uri.parse('$apiUrl$dataset/?name=$nombre');
+    var uri = Uri.parse('$apiUrl/$dataset/?name=$nombre');
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {

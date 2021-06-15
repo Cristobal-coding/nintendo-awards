@@ -27,22 +27,22 @@ class ZeldaPage extends StatelessWidget {
         width: 500,
         height: 500,
         child: FutureBuilder(
-          future:
-              zelda.getById('characters', 'Link', '5f6d186f246bd9a0809d61c7'),
+          future: zelda.getAllCharacters(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
                 separatorBuilder: (_, __) => Divider(),
-                itemCount: 1,
+                itemCount: 2,
                 itemBuilder: (context, index) {
+                  print(snapshot.data['data'].length);
                   return ListTile(
                     title: Text(
-                      snapshot.data['description'],
+                      snapshot.data['data'][index]['description'],
                       style: TextStyle(fontFamily: zeldaFontFamily),
                     ),
-                    subtitle: Text(snapshot.data['gender']),
+                    subtitle: Text(snapshot.data['data'][index]['gender']),
                   );
                 },
               );
