@@ -18,7 +18,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   TextEditingController nombreCtrl = new TextEditingController();
   bool noClear = false;
   bool refresh = false;
-  bool showProgres=true;
+  bool showProgres = true;
   @override
   void initState() {
     super.initState();
@@ -33,29 +33,32 @@ class _ZeldaPageState extends State<ZeldaPage> {
     });
   }
 
-  Future<List<dynamic>> cargarDatos(int numePagina, nom, bool refresh) async {
+  Future<List<dynamic>> cargarDatos(int numePagina, nom, bool refrescar) async {
     var data = await zelda.getAllCharactersNom(numePagina, nom);
 
     //Lista sin filtro
-    if (data != null && nom == '') {
+    if (data != null && nom == '' && !refrescar) {
+      // print("Entro 1 ");
       listaDatos.addAll(data['data']);
-      showProgres=false;
+      showProgres = false;
     }
     //Lista con filtro
-    if (data != null && nom != '') {
+    if (data != null && nom != '' && !refrescar) {
+      // print("Entro 2 ");
       if (noClear) {
         listaDatos.clear();
         noClear = false;
-        showProgres=false;
+        showProgres = false;
       }
       listaDatos.addAll(data['data']);
     }
     //return lista sin filtro
-    if (data != null && refresh) {
+    if (data != null && refrescar) {
+      // print("Entro 3");
       listaDatos.clear();
       listaDatos.addAll(data['data']);
-      refresh=false;
-      showProgres=false;
+      refresh = false;
+      showProgres = false;
     }
 
     return listaDatos;
@@ -63,7 +66,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return Column(children: [
       // Container(
       //   color: Colors.grey,
@@ -91,9 +94,9 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Buscar"),
             onPressed: () {
               setState(() {
-                showProgres=true;
+                showProgres = true;
                 paginaActual = 0;
-                noClear=true;
+                noClear = true;
                 nombreTxt = nombreCtrl.value.text;
                 print("Nombre: $nombreTxt");
               });
@@ -106,13 +109,12 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Mostrar todos los personajes."),
             onPressed: () {
               setState(() {
-                showProgres=true;
+                showProgres = true;
                 noClear = true;
-                refresh=true;
+                refresh = true;
                 nombreTxt = "";
                 nombreCtrl.clear();
                 paginaActual = 0;
-                print("Nombre: $nombreTxt");
               });
             },
           ),
@@ -127,8 +129,8 @@ class _ZeldaPageState extends State<ZeldaPage> {
           future: cargarDatos(paginaActual, nombreTxt, refresh),
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting 
-                     && showProgres )) {
+                (listaDatos.connectionState == ConnectionState.waiting &&
+                    showProgres)) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
@@ -212,5 +214,4 @@ class _ZeldaPageState extends State<ZeldaPage> {
       ),
     ]);
   }
-  
 }
