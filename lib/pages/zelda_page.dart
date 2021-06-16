@@ -17,7 +17,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   String nombreTxt = '';
   TextEditingController nombreCtrl = new TextEditingController();
   bool noback = true;
-  bool noClear=true;
+  bool noClear = true;
   @override
   void initState() {
     super.initState();
@@ -25,12 +25,10 @@ class _ZeldaPageState extends State<ZeldaPage> {
       if (scrollCtrl.position.pixels == scrollCtrl.position.maxScrollExtent) {
         paginaActual++;
         // if (nombreTxt == "") {
-        
+
         // }
-        // // setState(() {
-        // });
+        setState(() {});
       }
-      
     });
   }
 
@@ -43,9 +41,9 @@ class _ZeldaPageState extends State<ZeldaPage> {
     }
     //Lista con filtro
     if (data != null && nom != '' && noback) {
-      if(noClear){
+      if (noClear) {
         listaDatos.clear();
-        noClear=false;
+        noClear = false;
       }
       listaDatos.addAll(data['data']);
     }
@@ -53,6 +51,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
     if (data != null && !noback) {
       listaDatos.clear();
       listaDatos.addAll(data['data']);
+      noback = true;
     }
 
     return listaDatos;
@@ -89,6 +88,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
             onPressed: () {
               setState(() {
                 paginaActual = 0;
+                noback = false;
                 nombreTxt = nombreCtrl.value.text;
                 print("Nombre: $nombreTxt");
               });
@@ -101,8 +101,8 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Mostrar todos los personajes."),
             onPressed: () {
               setState(() {
-                noback=false;
-                noClear=true;
+                noback = false;
+                noClear = true;
                 nombreTxt = "";
                 nombreCtrl.clear();
                 paginaActual = 0;
@@ -121,7 +121,8 @@ class _ZeldaPageState extends State<ZeldaPage> {
           future: cargarDatos(paginaActual, nombreTxt),
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting && noback)) {
+                (listaDatos.connectionState == ConnectionState.waiting &&
+                    !noback)) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
