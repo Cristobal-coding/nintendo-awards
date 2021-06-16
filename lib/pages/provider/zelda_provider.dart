@@ -6,24 +6,31 @@ import 'dart:convert';
 class ZeldaProvider {
   final String apiUrl = 'https://zelda-api.apius.cc/api';
 
-  Future<LinkedHashMap<String, dynamic>> getAllCharacters() async {
-    var uri = Uri.parse('$apiUrl/characters/');
+  Future<LinkedHashMap<String, dynamic>> getAllCharacters(int numero) async {
+    print('numero: $numero');
+    var uri = Uri.parse('$apiUrl/characters?limit=50&page=$numero');
+
     var respuesta = await http.get(uri);
-    print(uri);
+    // print(uri);
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
       return null;
     }
-    // if (respuesta.statusCode == 200) {
-    //   if (respuesta.body.isNotEmpty) {
-    //     return json.decode(respuesta.body);
-    //   } else {
-    //     return null;
-    //   }
-    // } else {
-    //   return null;
-    // }
+  }
+
+  Future<LinkedHashMap<String, dynamic>> getAllCharactersNom(
+      int numero, String nom) async {
+    print('numero: $numero');
+    var uri = Uri.parse('$apiUrl/characters?name=$nom&limit=50&page=$numero');
+
+    var respuesta = await http.get(uri);
+    // print(uri);
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return null;
+    }
   }
 
   Future<LinkedHashMap<String, dynamic>> getById(
