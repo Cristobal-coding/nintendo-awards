@@ -31,6 +31,7 @@ class Personaje extends StatelessWidget {
         // ],
         image: DecorationImage(
           fit: BoxFit.fill,
+          // image:  CircularProgressIndicator()
           image:  NetworkImage(pathImage, )
         ),
       ),
