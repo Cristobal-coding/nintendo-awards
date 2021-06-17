@@ -16,7 +16,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   List<dynamic> listaDatos = [];
   String nombreTxt = '';
   TextEditingController nombreCtrl = new TextEditingController();
-  bool noClear = true;
+  bool noClear = false;
   bool refresh = false;
   bool showProgres=true;
   @override
@@ -93,6 +93,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
               setState(() {
                 showProgres=true;
                 paginaActual = 0;
+                noClear=true;
                 nombreTxt = nombreCtrl.value.text;
                 print("Nombre: $nombreTxt");
               });
