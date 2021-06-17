@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/zelda_provider.dart';
+import 'package:nintendo_awards/pages/zelda_character_nombre.dart';
 
 class ZeldaPage extends StatefulWidget {
   const ZeldaPage({Key key}) : super(key: key);
@@ -85,46 +86,49 @@ class _ZeldaPageState extends State<ZeldaPage> {
         child: TextField(
           controller: nombreCtrl,
           decoration: InputDecoration(
-              labelText: 'Nombre', hintText: 'Nombre del personaje'),
+              labelText: 'Busqueda', hintText: 'Nombre del personaje'),
         ),
       ),
-      Row(children: [
-        Container(
-          child: ElevatedButton(
-            child: Text("Buscar"),
-            onPressed: () {
-              setState(() {
-                showProgres = true;
-                paginaActual = 0;
-                noClear = true;
-                nombreTxt = nombreCtrl.value.text;
-                print("Nombre: $nombreTxt");
-              });
-            },
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(children: [
+          Container(
+            child: ElevatedButton(
+              child: Text("Buscar"),
+              onPressed: () {
+                setState(() {
+                  showProgres = true;
+                  paginaActual = 0;
+                  noClear = true;
+                  nombreTxt = nombreCtrl.value.text;
+                  print("Nombre: $nombreTxt");
+                });
+              },
+            ),
           ),
-        ),
-        Spacer(),
-        Container(
-          child: ElevatedButton(
-            child: Text("Mostrar todos los personajes."),
-            onPressed: () {
-              setState(() {
-                showProgres = true;
-                noClear = true;
-                refresh = true;
-                nombreTxt = "";
-                nombreCtrl.clear();
-                paginaActual = 0;
-              });
-            },
+          Spacer(),
+          Container(
+            child: ElevatedButton(
+              child: Text("Mostrar todos los personajes."),
+              onPressed: () {
+                setState(() {
+                  showProgres = true;
+                  noClear = true;
+                  refresh = true;
+                  nombreTxt = "";
+                  nombreCtrl.clear();
+                  paginaActual = 0;
+                });
+              },
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
       Spacer(),
 
       Container(
         width: size.width,
-        height: size.height * 0.65,
+        height: size.height * 0.6237,
         child: FutureBuilder(
           future: cargarDatos(paginaActual, nombreTxt, refresh),
           builder: (context, listaDatos) {
@@ -152,7 +156,12 @@ class _ZeldaPageState extends State<ZeldaPage> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          goShowCharacter(
+                              context,
+                              listaDatos.data[index]['name'],
+                              listaDatos.data[index]['_id']);
+                        },
                         child: Container(
                           width: size.width,
                           height: size.height * 0.2,
@@ -213,5 +222,14 @@ class _ZeldaPageState extends State<ZeldaPage> {
         ),
       ),
     ]);
+  }
+
+  void goShowCharacter(BuildContext context, String nombre, id) {
+    final route = new MaterialPageRoute(
+        builder: (context) => ZeldaCharacter(
+              nombre: nombre,
+              id: id,
+            ));
+    Navigator.push(context, route);
   }
 }
