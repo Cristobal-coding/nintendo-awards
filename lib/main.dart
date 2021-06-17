@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nintendo Awards°',
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: nintendoPrimaryColor, fontFamily: nintendoFontFamily),
       home: HomePage(),
