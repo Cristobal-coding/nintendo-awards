@@ -136,7 +136,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
                     //   return Center(child: LinearProgressIndicator());
                     // } else {
                     //   return Center(
-                    //     child: Text("No quedan mas datos."),
+                    //     child: Text("No quedan mas datos.")
                     //   );
                     // }
                   } else {
