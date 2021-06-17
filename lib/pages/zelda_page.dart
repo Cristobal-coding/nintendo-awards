@@ -18,6 +18,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   TextEditingController nombreCtrl = new TextEditingController();
   bool noClear = true;
   bool refresh = false;
+  bool showProgres=true;
   @override
   void initState() {
     super.initState();
@@ -32,34 +33,20 @@ class _ZeldaPageState extends State<ZeldaPage> {
     });
   }
 
-  // Future<List<dynamic>> mergeData(int numePagina, nom) async {
-  //   var data = await zelda.getAllCharactersNom(numePagina, nom);
-  //   if(data !=null){
-  //     listaDatos.addAll(data['data']);
-  //   }
-  //   return listaDatos;
-  // }
-  // Future<List<dynamic>> refreshData() async {
-  //   var data = await zelda.getAllCharacters(0);
-  //   if(data !=null){
-  //     listaDatos.addAll(data['data']);
-  //   }
-  //   return listaDatos;
-  // }
-
-  
   Future<List<dynamic>> cargarDatos(int numePagina, nom, bool refresh) async {
     var data = await zelda.getAllCharactersNom(numePagina, nom);
 
     //Lista sin filtro
     if (data != null && nom == '') {
       listaDatos.addAll(data['data']);
+      showProgres=false;
     }
     //Lista con filtro
     if (data != null && nom != '') {
       if (noClear) {
         listaDatos.clear();
         noClear = false;
+        showProgres=false;
       }
       listaDatos.addAll(data['data']);
     }
@@ -68,6 +55,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
       listaDatos.clear();
       listaDatos.addAll(data['data']);
       refresh=false;
+      showProgres=false;
     }
 
     return listaDatos;
@@ -103,6 +91,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Buscar"),
             onPressed: () {
               setState(() {
+                showProgres=true;
                 paginaActual = 0;
                 nombreTxt = nombreCtrl.value.text;
                 print("Nombre: $nombreTxt");
@@ -116,6 +105,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Mostrar todos los personajes."),
             onPressed: () {
               setState(() {
+                showProgres=true;
                 noClear = true;
                 refresh=true;
                 nombreTxt = "";
@@ -137,7 +127,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
                 (listaDatos.connectionState == ConnectionState.waiting 
-                     && nombreTxt != '')) {
+                     && showProgres )) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
