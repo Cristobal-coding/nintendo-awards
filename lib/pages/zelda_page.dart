@@ -23,12 +23,14 @@ class _ZeldaPageState extends State<ZeldaPage> {
     super.initState();
     scrollCtrl.addListener(() {
       if (scrollCtrl.position.pixels == scrollCtrl.position.maxScrollExtent) {
-        setState(() {
-          paginaActual++;
-          print(paginaActual);
-        });
+        paginaActual++;
+        // if (nombreTxt == "") {
+        
+        // }
+        // // setState(() {
+        // });
       }
-      // if (nombreTxt == "") {}
+      
     });
   }
 
