@@ -119,7 +119,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
           future: cargarDatos(paginaActual, nombreTxt),
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting)) {
+                (listaDatos.connectionState == ConnectionState.waiting && noback)) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
