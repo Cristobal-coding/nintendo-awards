@@ -17,6 +17,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   String nombreTxt = '';
   TextEditingController nombreCtrl = new TextEditingController();
   bool noback = true;
+  bool noClear=true;
   @override
   void initState() {
     super.initState();
@@ -40,7 +41,10 @@ class _ZeldaPageState extends State<ZeldaPage> {
     }
     //Lista con filtro
     if (data != null && nom != '' && noback) {
-      listaDatos.clear();
+      if(noClear){
+        listaDatos.clear();
+        noClear=false;
+      }
       listaDatos.addAll(data['data']);
     }
     //return lista sin filtro
@@ -96,6 +100,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
             onPressed: () {
               setState(() {
                 noback=false;
+                noClear=true;
                 nombreTxt = "";
                 nombreCtrl.clear();
                 paginaActual = 0;
@@ -114,8 +119,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
           future: cargarDatos(paginaActual, nombreTxt),
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting &&
-                    nombreTxt != "")) {
+                (listaDatos.connectionState == ConnectionState.waiting)) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
