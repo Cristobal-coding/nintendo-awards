@@ -16,46 +16,37 @@ class _ZeldaPageState extends State<ZeldaPage> {
   List<dynamic> listaDatos = [];
   String nombreTxt = '';
   TextEditingController nombreCtrl = new TextEditingController();
-  bool datosLeft;
-  bool aux;
-  bool aux2;
+  bool noback = true;
   @override
   void initState() {
     super.initState();
     scrollCtrl.addListener(() {
-      if (nombreTxt == "") {
-        if (scrollCtrl.position.pixels == scrollCtrl.position.maxScrollExtent) {
-          setState(() {
-            paginaActual++;
-            print(paginaActual);
-          });
-        }
+      if (scrollCtrl.position.pixels == scrollCtrl.position.maxScrollExtent) {
+        setState(() {
+          paginaActual++;
+          print(paginaActual);
+        });
       }
+      // if (nombreTxt == "") {}
     });
   }
 
   Future<List<dynamic>> cargarDatos(int numePagina, nom) async {
     var data = await zelda.getAllCharactersNom(numePagina, nom);
 
-    datosLeft = false;
-    if (aux2 == false) {
-      listaDatos.clear();
-      aux2 = true;
-    }
-
-    if (aux = true) if ((data != null) && nombreTxt == '') {
-      if (aux == false) {
-        listaDatos.clear();
-      }
-
+    //Lista sin filtro
+    if (data != null && nom == '' && noback) {
       listaDatos.addAll(data['data']);
-      datosLeft = true;
-    } else {
-      if (data != null) {
-        listaDatos.clear();
-        aux = false;
-        listaDatos.addAll(data['data']);
-      }
+    }
+    //Lista con filtro
+    if (data != null && nom != '' && noback) {
+      listaDatos.clear();
+      listaDatos.addAll(data['data']);
+    }
+    //return lista sin filtro
+    if (data != null && !noback) {
+      listaDatos.clear();
+      listaDatos.addAll(data['data']);
     }
 
     return listaDatos;
@@ -104,7 +95,6 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Mostrar todos los personajes."),
             onPressed: () {
               setState(() {
-                aux2 = false;
                 nombreTxt = "";
                 nombreCtrl.clear();
                 paginaActual = 0;
@@ -134,13 +124,14 @@ class _ZeldaPageState extends State<ZeldaPage> {
                 itemBuilder: (context, index) {
                   // print(listaDatos.data['data']);
                   if (index == listaDatos.data.length) {
-                    if (datosLeft) {
-                      return Center(child: LinearProgressIndicator());
-                    } else {
-                      return Center(
-                        child: Text("No quedan mas datos."),
-                      );
-                    }
+                    return Center(child: LinearProgressIndicator());
+                    // if (datosLeft) {
+                    //   return Center(child: LinearProgressIndicator());
+                    // } else {
+                    //   return Center(
+                    //     child: Text("No quedan mas datos."),
+                    //   );
+                    // }
                   } else {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
