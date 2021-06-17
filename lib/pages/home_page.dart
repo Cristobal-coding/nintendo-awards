@@ -32,6 +32,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset:
+          false, // to keep the size, when opening the keyboard
+
       appBar: AppBar(
           title: Text(
             _pages[_currentIndex]['texto'],

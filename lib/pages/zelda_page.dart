@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/zelda_provider.dart';
+import 'package:nintendo_awards/pages/zelda_character_nombre.dart';
 
 class ZeldaPage extends StatefulWidget {
   const ZeldaPage({Key key}) : super(key: key);
@@ -18,7 +19,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
   TextEditingController nombreCtrl = new TextEditingController();
   bool noClear = false;
   bool refresh = false;
-  bool showProgres=true;
+  bool showProgres = true;
   @override
   void initState() {
     super.initState();
@@ -33,29 +34,32 @@ class _ZeldaPageState extends State<ZeldaPage> {
     });
   }
 
-  Future<List<dynamic>> cargarDatos(int numePagina, nom, bool refresh) async {
+  Future<List<dynamic>> cargarDatos(int numePagina, nom, bool refrescar) async {
     var data = await zelda.getAllCharactersNom(numePagina, nom);
 
     //Lista sin filtro
-    if (data != null && nom == '') {
+    if (data != null && nom == '' && !refrescar) {
+      // print("Entro 1 ");
       listaDatos.addAll(data['data']);
-      showProgres=false;
+      showProgres = false;
     }
     //Lista con filtro
-    if (data != null && nom != '') {
+    if (data != null && nom != '' && !refrescar) {
+      // print("Entro 2 ");
       if (noClear) {
         listaDatos.clear();
         noClear = false;
-        showProgres=false;
+        showProgres = false;
       }
       listaDatos.addAll(data['data']);
     }
     //return lista sin filtro
-    if (data != null && refresh) {
+    if (data != null && refrescar) {
+      // print("Entro 3");
       listaDatos.clear();
       listaDatos.addAll(data['data']);
-      refresh=false;
-      showProgres=false;
+      refresh = false;
+      showProgres = false;
     }
 
     return listaDatos;
@@ -63,7 +67,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return Column(children: [
       // Container(
       //   color: Colors.grey,
@@ -82,53 +86,55 @@ class _ZeldaPageState extends State<ZeldaPage> {
         child: TextField(
           controller: nombreCtrl,
           decoration: InputDecoration(
-              labelText: 'Nombre', hintText: 'Nombre del personaje'),
+              labelText: 'Busqueda', hintText: 'Nombre del personaje'),
         ),
       ),
-      Row(children: [
-        Container(
-          child: ElevatedButton(
-            child: Text("Buscar"),
-            onPressed: () {
-              setState(() {
-                showProgres=true;
-                paginaActual = 0;
-                noClear=true;
-                nombreTxt = nombreCtrl.value.text;
-                print("Nombre: $nombreTxt");
-              });
-            },
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(children: [
+          Container(
+            child: ElevatedButton(
+              child: Text("Buscar"),
+              onPressed: () {
+                setState(() {
+                  showProgres = true;
+                  paginaActual = 0;
+                  noClear = true;
+                  nombreTxt = nombreCtrl.value.text;
+                  print("Nombre: $nombreTxt");
+                });
+              },
+            ),
           ),
-        ),
-        Spacer(),
-        Container(
-          child: ElevatedButton(
-            child: Text("Mostrar todos los personajes."),
-            onPressed: () {
-              setState(() {
-                showProgres=true;
-                noClear = true;
-                refresh=true;
-                nombreTxt = "";
-                nombreCtrl.clear();
-                paginaActual = 0;
-                print("Nombre: $nombreTxt");
-              });
-            },
+          Spacer(),
+          Container(
+            child: ElevatedButton(
+              child: Text("Mostrar todos los personajes."),
+              onPressed: () {
+                setState(() {
+                  showProgres = true;
+                  noClear = true;
+                  refresh = true;
+                  nombreTxt = "";
+                  nombreCtrl.clear();
+                  paginaActual = 0;
+                });
+              },
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
       Spacer(),
 
       Container(
         width: size.width,
-        height: size.height * 0.65,
+        height: size.height * 0.6237,
         child: FutureBuilder(
           future: cargarDatos(paginaActual, nombreTxt, refresh),
           builder: (context, listaDatos) {
             if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting 
-                     && showProgres )) {
+                (listaDatos.connectionState == ConnectionState.waiting &&
+                    showProgres)) {
               return Center(child: CircularProgressIndicator());
             } else {
               return ListView.separated(
@@ -150,7 +156,12 @@ class _ZeldaPageState extends State<ZeldaPage> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          goShowCharacter(
+                              context,
+                              listaDatos.data[index]['name'],
+                              listaDatos.data[index]['_id']);
+                        },
                         child: Container(
                           width: size.width,
                           height: size.height * 0.2,
@@ -212,5 +223,13 @@ class _ZeldaPageState extends State<ZeldaPage> {
       ),
     ]);
   }
-  
+
+  void goShowCharacter(BuildContext context, String nombre, id) {
+    final route = new MaterialPageRoute(
+        builder: (context) => ZeldaCharacter(
+              nombre: nombre,
+              id: id,
+            ));
+    Navigator.push(context, route);
+  }
 }

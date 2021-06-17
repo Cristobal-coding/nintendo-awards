@@ -21,7 +21,7 @@ class ZeldaProvider {
 
   Future<LinkedHashMap<String, dynamic>> getAllCharactersNom(
       int numero, String nom) async {
-    print('numero: $numero');
+    // print('numero: $numero');
     var uri = Uri.parse('$apiUrl/characters?name=$nom&limit=50&page=$numero');
 
     var respuesta = await http.get(uri);
