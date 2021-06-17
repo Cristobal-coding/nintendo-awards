@@ -95,6 +95,7 @@ class _ZeldaPageState extends State<ZeldaPage> {
             child: Text("Mostrar todos los personajes."),
             onPressed: () {
               setState(() {
+                noback=false;
                 nombreTxt = "";
                 nombreCtrl.clear();
                 paginaActual = 0;
