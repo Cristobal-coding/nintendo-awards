@@ -52,4 +52,15 @@ class ZeldaProvider {
       return null;
     }
   }
+
+  Future<LinkedHashMap<String, dynamic>> getFirstGame(link) async {
+    var uri = Uri.parse(link);
+    var respuesta = await http.get(uri);
+    print(uri);
+    if (respuesta.statusCode == 200) {
+      return json.decode(respuesta.body);
+    } else {
+      return null;
+    }
+  }
 }
