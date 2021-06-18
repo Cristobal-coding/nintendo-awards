@@ -18,7 +18,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Nuevo Personaje',
@@ -26,7 +26,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: ListView(
           children: [
             // Input Text Nombre
             Container(
@@ -57,7 +57,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Primera Aparición(Fecha)',
-                    hintText: 'Formato dd/mm/yyyy'),
+                    hintText: 'Ejem: 23-09-2021'),
                 style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),

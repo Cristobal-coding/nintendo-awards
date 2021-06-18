@@ -18,11 +18,10 @@ class _MarioPageState extends State<MarioPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     MarioProvider mario = new MarioProvider();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical:15.0 ),
-      child: Column(
+    return Column(
         children: [
           Container(
+            height: size.height*0.05,
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
@@ -49,7 +48,7 @@ class _MarioPageState extends State<MarioPage> {
           ),
           Container(
             color: Colors.white,
-            height: size.height * 0.34,
+            height: size.height * 0.35,
             width: double.infinity,
             child: FutureBuilder(
                 future: mario.getAll('personajes'),
@@ -79,6 +78,7 @@ class _MarioPageState extends State<MarioPage> {
                 }),
           ),
           Container(
+            height: size.height*0.05,
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
@@ -105,7 +105,7 @@ class _MarioPageState extends State<MarioPage> {
           ),
           Container(
             color: Colors.white,
-            height: size.height * 0.34,
+            height: size.height * 0.35,
             width: double.infinity,
             child: FutureBuilder(
                 future: mario.getAll('juegos'),
@@ -135,8 +135,7 @@ class _MarioPageState extends State<MarioPage> {
                 }),
           ),
         ],
-      ),
-    );
+      );
   }
 
   void goNewCharacter(BuildContext context) {
