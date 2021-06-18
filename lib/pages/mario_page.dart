@@ -19,9 +19,10 @@ class _MarioPageState extends State<MarioPage> {
     Size size = MediaQuery.of(context).size;
     MarioProvider mario = new MarioProvider();
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: size.height*0.05,
+            height: size.height*0.04,
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
@@ -78,7 +79,7 @@ class _MarioPageState extends State<MarioPage> {
                 }),
           ),
           Container(
-            height: size.height*0.05,
+            height: size.height*0.04,
             alignment: Alignment.centerLeft,
             child: Row(
               children: [
