@@ -56,7 +56,9 @@ class ZeldaProvider {
   Future<LinkedHashMap<String, dynamic>> getFirstGame(link) async {
     var uri = Uri.parse(link);
     var respuesta = await http.get(uri);
-    print(uri);
+    await Future.delayed(Duration(seconds: 10));
+
+    // print(uri);
     if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {

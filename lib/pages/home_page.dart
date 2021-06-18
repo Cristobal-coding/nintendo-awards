@@ -53,7 +53,10 @@ class _HomePageState extends State<HomePage> {
               label: 'Mario',
               backgroundColor: (_pages[_currentIndex]['color'])),
           BottomNavigationBarItem(
-              icon: Icon(IconsBottomNav.triforce),
+              icon: Icon(
+                IconsBottomNav.triforce,
+                // size: 30,
+              ),
               label: 'The legend of Zelda',
               backgroundColor: (_pages[_currentIndex]['color'])),
         ],
