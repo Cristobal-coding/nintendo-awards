@@ -5,8 +5,8 @@ import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
 class ShowPersonaje extends StatefulWidget {
-  final AsyncSnapshot<dynamic> snapshot;
-  ShowPersonaje({Key key, this.snapshot}) : super(key: key);
+  final String nombre;
+  ShowPersonaje({Key key, this.nombre}) : super(key: key);
 
   @override
   _ShowPersonajeState createState() => _ShowPersonajeState();
@@ -14,157 +14,172 @@ class ShowPersonaje extends StatefulWidget {
 
 class _ShowPersonajeState extends State<ShowPersonaje> {
   @override
+  void initState() { 
+    super.initState();
+    nombreID=widget.nombre;
+  }
+  String nombreID;
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     MarioProvider mario = new MarioProvider();
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.network(
-              widget.snapshot.data['img_url'] != null
-                  ? widget.snapshot.data['img_url']
-                  : 'https://i.imgur.com/GnkzOs4.png',
-              width: 50,
-              height: 70,
-            ),
-            Container(
-              child: Text(
-                widget.snapshot.data['nombre'],
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                ),
-              ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+    return FutureBuilder(
+      future: mario.getOneById('personajes', nombreID),
+      builder: (context, snapshot){
+        if(!snapshot.hasData){
+          return Center(child: CircularProgressIndicator());
+        }else{
+          return Column(
             children: [
-              Text(
-                'Raza: ',
-                style: TextStyle(color: nintendoStar, fontSize: 20),
-              ),
-              Text(
-                '${widget.snapshot.data['raza']}',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              Spacer(),
-              Text(
-                'Género: ',
-                style: TextStyle(color: nintendoStar, fontSize: 20),
-              ),
-              Text(
-                '${widget.snapshot.data['genero']}',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          child: Row(
-            children: [
-              Text(
-                'Primera Aparicion en: ',
-                style: TextStyle(color: nintendoStar, fontSize: 20),
-              ),
-              Text(
-                '${widget.snapshot.data['occurrence']}',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: size.height * 0.2692,
-            // width: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: nintendoStar,
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [
-                  nintendoStar,
-                  nintendoPrimaryColor,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(
+                    snapshot.data['img_url'] != null
+                        ? snapshot.data['img_url']
+                        : 'https://i.imgur.com/GnkzOs4.png',
+                    width: 50,
+                    height: 70,
+                  ),
+                  Container(
+                    child: Text(
+                      snapshot.data['nombre'],
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            child: Column(
-              children: [
-                Text('Creado por:',
-                    style: TextStyle(fontSize: 30, color: Colors.white)),
-                Text(
-                  '${widget.snapshot.data['creator']}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Raza: ',
+                      style: TextStyle(color: nintendoStar, fontSize: 20),
+                    ),
+                    Text(
+                      '${snapshot.data['raza']}',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    Spacer(),
+                    Text(
+                      'Género: ',
+                      style: TextStyle(color: nintendoStar, fontSize: 20),
+                    ),
+                    Text(
+                      '${snapshot.data['genero']}',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ],
                 ),
-                Spacer(),
-                Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Container(
-                    // color: Colors.blue,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 3.0, vertical: 0),
-                          child: Container(
-                            width: 140,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: nintendoPrimaryColor),
-                              onPressed: () {
-                                goUpdatePersonaje(
-                                    context,
-                                    widget.snapshot.data['nombre'],
-                                    widget.snapshot.data['occurrence'],
-                                    widget.snapshot.data['genero'],
-                                    widget.snapshot.data['creator'],
-                                    widget.snapshot.data['raza'],
-                                    widget.snapshot.data['img_url']);
-                              },
-                              child: Text('Editar'),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 140,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: nintendoPrimaryColor),
-                            child: Text('Eliminar'),
-                            onPressed: () {
-                              confirmDialog(
-                                      context, widget.snapshot.data['nombre'])
-                                  .then((value) {
-                                if (value) {
-                                  Navigator.pop(context);
-                                  showMessageSuccess(
-                                      'El Personaje ${widget.snapshot.data["nombre"]} ha sido Borrado.');
-                                  setState(() {
-                                    mario.deletePersonaje(
-                                        widget.snapshot.data['nombre']);
-                                  });
-                                }
-                              });
-                            },
-                          ),
-                        ),
+              ),
+              Container(
+                child: Row(
+                  children: [
+                    Text(
+                      'Primera Aparicion en: ',
+                      style: TextStyle(color: nintendoStar, fontSize: 20),
+                    ),
+                    Text(
+                      '${snapshot.data['occurrence']}',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  alignment: Alignment.center,
+                  height: size.height * 0.2692,
+                  // width: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: nintendoStar,
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        nintendoStar,
+                        nintendoPrimaryColor,
                       ],
                     ),
                   ),
-                ),
-              ],
-            )),
-      ],
+                  child: Column(
+                    children: [
+                      Text('Creado por:',
+                          style: TextStyle(fontSize: 30, color: Colors.white)),
+                      Text(
+                        '${snapshot.data['creator']}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(30.0),
+                        child: Container(
+                          // color: Colors.blue,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 3.0, vertical: 0),
+                                child: Container(
+                                  width: 140,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        primary: nintendoPrimaryColor),
+                                    onPressed: () {
+                                      goUpdatePersonaje(
+                                          context,
+                                          snapshot.data['nombre'],
+                                          snapshot.data['occurrence'],
+                                          snapshot.data['genero'],
+                                          snapshot.data['creator'],
+                                          snapshot.data['raza'],
+                                          snapshot.data['img_url']);
+                                    },
+                                    child: Text('Editar'),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 140,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: nintendoPrimaryColor),
+                                  child: Text('Eliminar'),
+                                  onPressed: () {
+                                    confirmDialog(
+                                            context, snapshot.data['nombre'])
+                                        .then((value) {
+                                      if (value) {
+                                        Navigator.pop(context);
+                                        showMessageSuccess(
+                                            'El Personaje ${snapshot.data["nombre"]} ha sido Borrado.');
+                                        setState(() {
+                                          mario.deletePersonaje(
+                                              snapshot.data['nombre']);
+                                        });
+                                      }
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
+          );
+        }
+      },
     );
   }
 
@@ -222,8 +237,10 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
               raza: raza,
               img: img_url,
             ));
-    Navigator.push(context, route).then((valor) {
-      setState(() {});
+    Navigator.push(context, route).then((value){
+      setState(() {
+           nombreID=value;   
+      });
     });
   }
 }

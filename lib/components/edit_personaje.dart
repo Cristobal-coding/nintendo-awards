@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nintendo_awards/components/show_personaje.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
@@ -240,7 +241,6 @@ class _EditPersonajeState extends State<EditPersonaje> {
             : '';
       });
     } else {
-      Navigator.pop(context);
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -256,6 +256,7 @@ class _EditPersonajeState extends State<EditPersonaje> {
             backgroundColor: nintendoStar,
           ),
         );
+        Navigator.pop(context, nombreCtrl.value.text);
       });
     }
   }

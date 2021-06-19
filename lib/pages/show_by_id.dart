@@ -14,7 +14,6 @@ class ShowById extends StatefulWidget {
 class _ShowByIdState extends State<ShowById> {
   @override
   Widget build(BuildContext context) {
-    
     MarioProvider mario = new MarioProvider();
     return Scaffold(
       appBar: AppBar(
@@ -26,37 +25,25 @@ class _ShowByIdState extends State<ShowById> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 400,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: nintendoPrimaryColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: nintendoIconsColor,
-                    blurRadius: 3.0,
-                    spreadRadius: 0.0,
-                    offset: Offset(2.0, 1.0),
-                  )
-                ],
-              ),
-              child: FutureBuilder(
-                future: mario.getOneById(widget.set, widget.nombre),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
-                  } else {
-                    return Column(
-                      children: [
-                        ShowPersonaje(
-                          snapshot: snapshot,
-                        ),
-                      ],
-                    );
-                  }
-                },
-              ),
-            ),
+                height: 400,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: nintendoPrimaryColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: nintendoIconsColor,
+                      blurRadius: 3.0,
+                      spreadRadius: 0.0,
+                      offset: Offset(2.0, 1.0),
+                    )
+                  ],
+                ),
+                child: Column(children: [
+                  ShowPersonaje(
+                    nombre: widget.nombre,
+                  ),
+                ])),
           ),
         ),
       ),
