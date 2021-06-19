@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nintendo_awards/components/show_juego.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/form_personaje.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
@@ -122,7 +123,7 @@ class _MarioPageState extends State<MarioPage> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            print('Tap');
+                            goShowGame(context, snapshot.data['results'][index]['id']);
                           },
                           child: Juego(
                             pathImage: snapshot.data['results'][index]['img_url'] ,
@@ -148,6 +149,12 @@ class _MarioPageState extends State<MarioPage> {
   }
   void goShowCharacter(BuildContext context, String nombre,set) {
     final route = new MaterialPageRoute(builder: (context) => ShowById(nombre: nombre,set: set,));
+    Navigator.push(context, route).then((valor) {
+      setState(() {});
+    });
+  }
+  void goShowGame(BuildContext context, int id) {
+    final route = new MaterialPageRoute(builder: (context) => ShowJuego(id: id,));
     Navigator.push(context, route).then((valor) {
       setState(() {});
     });

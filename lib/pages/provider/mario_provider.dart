@@ -21,6 +21,17 @@ class MarioProvider {
     var respuesta = await http.get(uri);
 
     if (respuesta.statusCode == 200) {
+      print(uri);
+      return json.decode(respuesta.body);
+    } else {
+      return null;
+    }
+  }
+  Future<LinkedHashMap<String, dynamic>> getJuego(int id) async {
+    var uri = Uri.parse('$apiUrl/juegos/$id');
+    var respuesta = await http.get(uri);
+
+    if (respuesta.statusCode == 200) {
       return json.decode(respuesta.body);
     } else {
       return null;
