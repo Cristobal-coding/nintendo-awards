@@ -256,7 +256,7 @@ class _EditPersonajeState extends State<EditPersonaje> {
             backgroundColor: nintendoStar,
           ),
         );
-        Navigator.pop(context, nombreCtrl.value.text);
+        Navigator.pop(context, nombreCtrl.value.text,);
       });
     }
   }

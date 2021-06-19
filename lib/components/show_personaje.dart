@@ -14,10 +14,11 @@ class ShowPersonaje extends StatefulWidget {
 
 class _ShowPersonajeState extends State<ShowPersonaje> {
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-    nombreID=widget.nombre;
+    nombreID = widget.nombre;
   }
+
   String nombreID;
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,10 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
     MarioProvider mario = new MarioProvider();
     return FutureBuilder(
       future: mario.getOneById('personajes', nombreID),
-      builder: (context, snapshot){
-        if(!snapshot.hasData){
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
-        }else{
+        } else {
           return Column(
             children: [
               Row(
@@ -94,7 +95,7 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
                   alignment: Alignment.center,
                   height: size.height * 0.2692,
                   // width: 200,
-                  
+
                   child: Column(
                     children: [
                       Text('Creado por:',
@@ -226,9 +227,12 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
               raza: raza,
               img: img_url,
             ));
-    Navigator.push(context, route).then((value){
+    Navigator.push(context, route).then((value) {
       setState(() {
-           nombreID=value;   
+        print(value);
+        if (value!=null){
+          nombreID = value;
+        }
       });
     });
   }
