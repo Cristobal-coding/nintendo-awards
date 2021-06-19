@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
@@ -70,74 +71,112 @@ class _ShowJuegoState extends State<ShowJuego> {
                                 ),
                               ),
                             ),
+                            Container(
+                              child: ElevatedButton(
+                                onPressed: (){},
+                                style: ElevatedButton.styleFrom(
+                                  primary: nintendoPrimaryColor
+                                ),
+                                child: Text('Editar Datos'),
+                              ),
+                            ),
                           ],
                         )
                       ],
                     ),
                     Row(
-                        children: [
-                          Text(
-                            'Desarrollador: ',
-                            style: TextStyle(
-                                color: nintendoPrimaryColor, fontSize: 23),
-                          ),
-                          Text(
-                            '${snapshot.data['developer']}',
-                            style: TextStyle(fontSize: 23),
-                          ),
-                        ],
-                      ),
-                     Row(
-                        children: [
-                          Text(
-                            'Lanzamiento: ',
-                            style: TextStyle(
-                                color: nintendoPrimaryColor, fontSize: 23),
-                          ),
-                          Text(
-                            '${snapshot.data['lanzamiento']}',
-                            style: TextStyle(fontSize: 23),
-                          ),
-                        ],
-                      ),
+                      children: [
+                        Text(
+                          'Desarrollador: ',
+                          style: TextStyle(
+                              color: nintendoPrimaryColor, fontSize: 23),
+                        ),
+                        Text(
+                          '${snapshot.data['developer']}',
+                          style: TextStyle(fontSize: 23),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Lanzamiento: ',
+                          style: TextStyle(
+                              color: nintendoPrimaryColor, fontSize: 23),
+                        ),
+                        Text(
+                          '${snapshot.data['lanzamiento']}',
+                          style: TextStyle(fontSize: 23),
+                        ),
+                      ],
+                    ),
                     Container(
                       alignment: Alignment.topCenter,
                       height: 100,
                       child: Row(
-                          children: [
-                            // Text(
-                            //   'Descripcion: ',
-                            //   style: TextStyle(
-                            //       color: nintendoPrimaryColor, fontSize: 23),
-                            // ),
-                            Flexible(
-                              child: Text(
-                                'Descripcion: ${snapshot.data['descripcion']}',
-                                style: TextStyle(fontSize: 23),
-                              ),
+                        children: [
+                          // Text(
+                          //   'Descripcion: ',
+                          //   style: TextStyle(
+                          //       color: nintendoPrimaryColor, fontSize: 23),
+                          // ),
+                          Flexible(
+                            child: Text(
+                              'Descripcion: ${snapshot.data['descripcion']}',
+                              style: TextStyle(fontSize: 23),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      'Lista de Personajes',
-                      style:
-                          TextStyle(fontSize: 21, color: nintendoPrimaryColor),
+                    Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                          child: Text(
+                            'Lista de Personajes',
+                            style:
+                                TextStyle(fontSize: 21, color: nintendoPrimaryColor),
+                          ),
+                        ),
+                        Spacer(),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: nintendoPrimaryColor
+                            ),
+                            onPressed: (){},
+                            child: Text('Añadir'),
+                          ),
+                        )
+                      ],
                     ),
                     Container(
                       width: double.infinity,
-                      height: size.height * 0.37,
+                      height: size.height * 0.35,
                       child: ListView.separated(
                         separatorBuilder: (context, index) => Divider(),
-                        itemCount: snapshot.data['personajes'].length,
+                        itemCount: snapshot.data['personajes'].length != 0?snapshot.data['personajes'].length:1,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: Image.network(snapshot.data['personajes'][index]['img_url']),
-                            title: Text(
-                                snapshot.data['personajes'][index]['nombre']),
-                            subtitle: Text(snapshot.data['personajes'][index]
-                                ['occurrence']),
-                          );
+                          if (snapshot.data['personajes'].length == 0) {
+                            print('holaa');
+                            print(snapshot.data['personajes'].length);
+                            return ListTile(
+                              leading: Icon(MdiIcons.information),
+                              title: Text('No se han agredado Personajes'),
+                              // subtitle: Text('Por favor añada con el botón'),
+                            );
+                          }else{
+                            return ListTile(
+                              leading: Image.network(
+                                  snapshot.data['personajes'][index]['img_url']),
+                              title: Text(
+                                  snapshot.data['personajes'][index]['nombre']),
+                              subtitle: Text(snapshot.data['personajes'][index]
+                                  ['occurrence']),
+                            );
+                          }
                         },
                       ),
                     ),
