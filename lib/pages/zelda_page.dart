@@ -26,9 +26,6 @@ class _ZeldaPageState extends State<ZeldaPage> {
     scrollCtrl.addListener(() {
       if (scrollCtrl.position.pixels == scrollCtrl.position.maxScrollExtent) {
         paginaActual++;
-        // if (nombreTxt == "") {
-
-        // }
         setState(() {});
       }
     });
@@ -69,156 +66,152 @@ class _ZeldaPageState extends State<ZeldaPage> {
     Size size = MediaQuery.of(context).size;
 
     return Column(children: [
-      // Container(
-      //   color: Colors.grey,
-      //   padding: EdgeInsets.only(top: 20),
-      //   height: size.height * 0.02,
-      //   child: Text(
-      //     "The legend of Zelda Characters",
-      //     style: TextStyle(
-      //         fontWeight: FontWeight.bold,
-      //         fontFamily: zeldaFontFamily,
-      //         fontSize: 20),
-      //   ),
-      // ),
-      Container(
-        decoration: BoxDecoration(color: Colors.red),
-        child: TextField(
-          controller: nombreCtrl,
-          decoration: InputDecoration(
-              labelText: 'Busqueda', hintText: 'Nombre del personaje'),
+      Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+          child: Container(
+            height: size.height * 0.07,
+            decoration: BoxDecoration(),
+            child: TextField(
+              controller: nombreCtrl,
+              decoration: InputDecoration(
+                  labelText: 'Busqueda', hintText: 'Nombre del personaje'),
+            ),
+          ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(children: [
-          Container(
-            child: ElevatedButton(
-              child: Text("Buscar"),
-              onPressed: () {
-                setState(() {
-                  showProgres = true;
-                  paginaActual = 0;
-                  noClear = true;
-                  nombreTxt = nombreCtrl.value.text;
-                  print("Nombre: $nombreTxt");
-                });
-              },
-            ),
-          ),
-          Spacer(),
-          Container(
-            child: ElevatedButton(
-              child: Text("Mostrar todos los personajes."),
-              onPressed: () {
-                setState(() {
-                  showProgres = true;
-                  noClear = true;
-                  refresh = true;
-                  nombreTxt = "";
-                  nombreCtrl.clear();
-                  paginaActual = 0;
-                });
-              },
-            ),
-          ),
-        ]),
-      ),
-      Spacer(),
-
       Container(
-        width: size.width,
-        height: size.height * 0.6237,
-        child: FutureBuilder(
-          future: cargarDatos(paginaActual, nombreTxt, refresh),
-          builder: (context, listaDatos) {
-            if (!listaDatos.hasData ||
-                (listaDatos.connectionState == ConnectionState.waiting &&
-                    showProgres)) {
-              return Center(child: CircularProgressIndicator());
-            } else {
-              return ListView.separated(
-                controller: scrollCtrl,
-                separatorBuilder: (_, __) => Divider(),
-                itemCount: listaDatos.data.length,
-                itemBuilder: (context, index) {
-                  // print(listaDatos.data['data']);
-                  if (index == listaDatos.data.length) {
-                    return Center(child: LinearProgressIndicator());
-                    // if (datosLeft) {
-                    //   return Center(child: LinearProgressIndicator());
-                    // } else {
-                    //   return Center(
-                    //     child: Text("No quedan mas datos.")
-                    //   );
-                    // }
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: InkWell(
-                        onTap: () {
-                          goShowCharacter(
-                              context,
-                              listaDatos.data[index]['name'],
-                              listaDatos.data[index]['_id']);
-                        },
-                        child: Container(
-                          width: size.width,
-                          height: size.height * 0.2,
-                          color: Colors.red,
-                          child: Column(children: [
-                            ListTile(
-                                title: Text(
-                                  listaDatos.data[index]['name'],
-                                  style: TextStyle(
-                                    fontFamily: zeldaFontFamily,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                subtitle:
-                                    (listaDatos.data[index]['gender'] != null)
-                                        ? Text(listaDatos.data[index]['gender'])
-                                        : Text("No info.")),
-                            Padding(
-                              padding: const EdgeInsets.all(3),
-                              child: Text(
-                                listaDatos.data[index]['description'],
-                                style: TextStyle(fontFamily: zeldaFontFamily),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Row(children: [
-                                Container(
-                                  color: Colors.blue,
-                                  child: Text(
-                                    'Apariciones: ${listaDatos.data[index]['appearances'].length}',
-                                    style:
-                                        TextStyle(fontFamily: zeldaFontFamily),
-                                  ),
-                                ),
-                                Spacer(),
-                                Container(
-                                  child: Text(
-                                    'Raza: ${(listaDatos.data[index]['race'] != null) ? (listaDatos.data[index]['race']) : ("No info.")}',
-                                    style:
-                                        TextStyle(fontFamily: zeldaFontFamily),
-                                  ),
-                                )
-                              ]),
-                            ),
-                          ]),
-                        ),
-                      ),
-                    );
-                  }
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            Container(
+              child: ElevatedButton(
+                child: Text("Buscar"),
+                onPressed: () {
+                  setState(() {
+                    showProgres = true;
+                    paginaActual = 0;
+                    noClear = true;
+                    nombreTxt = nombreCtrl.value.text;
+                    print("Nombre: $nombreTxt");
+                  });
                 },
-              );
-            }
-          },
+              ),
+            ),
+            Spacer(),
+            Container(
+              child: ElevatedButton(
+                child: Text("Mostrar todos los personajes."),
+                onPressed: () {
+                  setState(() {
+                    showProgres = true;
+                    noClear = true;
+                    refresh = true;
+                    nombreTxt = "";
+                    nombreCtrl.clear();
+                    paginaActual = 0;
+                  });
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+      Expanded(
+        child: Container(
+          width: size.width,
+          height: size.height * 0.6237,
+          child: FutureBuilder(
+            future: cargarDatos(paginaActual, nombreTxt, refresh),
+            builder: (context, listaDatos) {
+              if (!listaDatos.hasData ||
+                  (listaDatos.connectionState == ConnectionState.waiting &&
+                      showProgres)) {
+                return Center(child: CircularProgressIndicator());
+              } else {
+                return ListView.separated(
+                  controller: scrollCtrl,
+                  separatorBuilder: (_, __) => Divider(),
+                  itemCount: listaDatos.data.length,
+                  itemBuilder: (context, index) {
+                    // print(listaDatos.data['data']);
+                    if (index == listaDatos.data.length) {
+                      return Center(child: LinearProgressIndicator());
+                      // if (datosLeft) {
+                      //   return Center(child: LinearProgressIndicator());
+                      // } else {
+                      //   return Center(
+                      //     child: Text("No quedan mas datos.")
+                      //   );
+                      // }
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () {
+                            goShowCharacter(
+                                context,
+                                listaDatos.data[index]['name'],
+                                listaDatos.data[index]['_id']);
+                          },
+                          child: Container(
+                            width: size.width,
+                            height: size.height * 0.2,
+                            color: Colors.red,
+                            child: Column(children: [
+                              ListTile(
+                                  title: Text(
+                                    listaDatos.data[index]['name'],
+                                    style: TextStyle(
+                                      fontFamily: zeldaFontFamily,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  subtitle: (listaDatos.data[index]['gender'] !=
+                                          null)
+                                      ? Text(listaDatos.data[index]['gender'])
+                                      : Text("No info.")),
+                              Padding(
+                                padding: const EdgeInsets.all(3),
+                                child: Text(
+                                  listaDatos.data[index]['description'],
+                                  style: TextStyle(fontFamily: zeldaFontFamily),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(children: [
+                                  Container(
+                                    color: Colors.blue,
+                                    child: Text(
+                                      'Apariciones: ${listaDatos.data[index]['appearances'].length}',
+                                      style: TextStyle(
+                                          fontFamily: zeldaFontFamily),
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Container(
+                                    child: Text(
+                                      'Raza: ${(listaDatos.data[index]['race'] != null) ? (listaDatos.data[index]['race']) : ("No info.")}',
+                                      style: TextStyle(
+                                          fontFamily: zeldaFontFamily),
+                                    ),
+                                  )
+                                ]),
+                              ),
+                            ]),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                );
+              }
+            },
+          ),
         ),
       ),
     ]);
