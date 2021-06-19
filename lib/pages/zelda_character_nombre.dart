@@ -3,6 +3,7 @@ import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/icons_bottom_nav_icons.dart';
 import 'package:nintendo_awards/pages/provider/zelda_provider.dart';
 import 'package:nintendo_awards/pages/widgets/foto_url.dart';
+import 'package:nintendo_awards/pages/widgets/triforce_progress_indicator.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class ZeldaCharacter extends StatelessWidget {
@@ -17,6 +18,7 @@ class ZeldaCharacter extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: zeldaBackground,
+          // leading: Icon(IconsBottomNav.triforce),
           title: FittedBox(
             child: Text(
               "Character's detail.",
@@ -33,11 +35,8 @@ class ZeldaCharacter extends StatelessWidget {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
-                      child: GlowingProgressIndicator(
-                          child: Icon(
-                    IconsBottomNav.triforce,
-                    size: 100,
-                  )));
+                    child: TriforceProgressIndicator(font: 100),
+                  );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -163,11 +162,8 @@ class ZeldaCharacter extends StatelessWidget {
                                         return Container(
                                           width: double.infinity,
                                           height: double.infinity,
-                                          child: GlowingProgressIndicator(
-                                              child: Icon(
-                                            IconsBottomNav.triforce,
-                                            size: 100,
-                                          )),
+                                          child: TriforceProgressIndicator(
+                                              font: 50),
                                         );
                                       } else {
                                         return Container(
