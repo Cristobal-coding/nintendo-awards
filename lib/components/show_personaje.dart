@@ -94,18 +94,7 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
                   alignment: Alignment.center,
                   height: size.height * 0.2692,
                   // width: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: nintendoStar,
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        nintendoStar,
-                        nintendoPrimaryColor,
-                      ],
-                    ),
-                  ),
+                  
                   child: Column(
                     children: [
                       Text('Creado por:',

@@ -30,6 +30,14 @@ class _ShowByIdState extends State<ShowById> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: nintendoPrimaryColor,
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        nintendoStar,
+                        nintendoPrimaryColor,
+                      ],
+                    ),
                   boxShadow: [
                     BoxShadow(
                       color: nintendoIconsColor,
