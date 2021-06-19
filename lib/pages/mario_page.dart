@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/form_personaje.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
+import 'package:nintendo_awards/pages/show_by_id.dart';
 import 'package:nintendo_awards/pages/widgets/juego.dart';
 import 'package:nintendo_awards/pages/widgets/personaje.dart';
 
@@ -64,10 +65,10 @@ class _MarioPageState extends State<MarioPage> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            print(snapshot.data['results'][index]['nombre']);
+                            goShowCharacter(context,snapshot.data['results'][index]['nombre'],'personajes');
                           },
                           child: Personaje(
-                            pathImage: snapshot.data['results'][index]['img_url'],
+                            pathImage: snapshot.data['results'][index]['img_url']!=null?snapshot.data['results'][index]['img_url']:'https://i.imgur.com/GnkzOs4.png',
                             genero: snapshot.data['results'][index]['genero'],
                             nombre: snapshot.data['results'][index]['nombre'],
                             fecha: snapshot.data['results'][index]['occurrence'],
@@ -121,10 +122,10 @@ class _MarioPageState extends State<MarioPage> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            print(snapshot.data['results'][index]['nombre']);
+                            print('Tap');
                           },
                           child: Juego(
-                            pathImage: snapshot.data['results'][index]['img_url'],
+                            pathImage: snapshot.data['results'][index]['img_url'] ,
                             genero: snapshot.data['results'][index]['developer'],
                             nombre: snapshot.data['results'][index]['nombre'],
                             fecha: snapshot.data['results'][index]['lanzamiento'],
@@ -141,6 +142,12 @@ class _MarioPageState extends State<MarioPage> {
 
   void goNewCharacter(BuildContext context) {
     final route = new MaterialPageRoute(builder: (context) => FormPersonaje());
+    Navigator.push(context, route).then((valor) {
+      setState(() {});
+    });
+  }
+  void goShowCharacter(BuildContext context, String nombre,set) {
+    final route = new MaterialPageRoute(builder: (context) => ShowById(nombre: nombre,set: set,));
     Navigator.push(context, route).then((valor) {
       setState(() {});
     });
