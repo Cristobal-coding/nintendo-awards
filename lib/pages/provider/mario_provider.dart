@@ -4,7 +4,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 class MarioProvider {
-  final String apiUrl = 'http://192.168.0.7:8000/api';
+  final String apiUrl = 'http://10.0.2.2:8000/api';
 
   Future<LinkedHashMap<String, dynamic>> getAll(String set) async {
     var uri = Uri.parse('$apiUrl/$set');
@@ -16,7 +16,8 @@ class MarioProvider {
       return null;
     }
   }
-  Future<LinkedHashMap<String, dynamic>> getOneById(String set,id) async {
+
+  Future<LinkedHashMap<String, dynamic>> getOneById(String set, id) async {
     var uri = Uri.parse('$apiUrl/$set/$id');
     var respuesta = await http.get(uri);
 
@@ -27,6 +28,7 @@ class MarioProvider {
       return null;
     }
   }
+
   Future<LinkedHashMap<String, dynamic>> getJuego(int id) async {
     var uri = Uri.parse('$apiUrl/juegos/$id');
     var respuesta = await http.get(uri);
@@ -37,18 +39,19 @@ class MarioProvider {
       return null;
     }
   }
+
   Future<http.Response> deletePersonaje(String nombre) async {
     var uri = Uri.parse('$apiUrl/personajes/$nombre');
     return await http.delete(uri);
-
   }
+
   Future<http.Response> deleteJuego(int id) async {
     var uri = Uri.parse('$apiUrl/juegos/$id');
     return await http.delete(uri);
-
   }
 
-  Future<LinkedHashMap<String, dynamic>> addPersonaje(String nombre, ocurrence, genero, creator, raza, img) async {
+  Future<LinkedHashMap<String, dynamic>> addPersonaje(
+      String nombre, ocurrence, genero, creator, raza, img) async {
     var uri = Uri.parse('$apiUrl/personajes');
     if (img != '') {
       var respuesta = await http.post(uri,
@@ -80,11 +83,45 @@ class MarioProvider {
           }));
       return json.decode(respuesta.body);
     }
-
   }
-  Future<LinkedHashMap<String, dynamic>> updatePersonaje(String id,nombre, ocurrence, genero, creator, raza, img) async {
+
+  Future<LinkedHashMap<String, dynamic>> addJuego(
+      String nombre, developer, descripcion, img, launch) async {
+    var uri = Uri.parse('$apiUrl/juegos');
+    if (img != '') {
+      var respuesta = await http.post(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+          body: jsonEncode(<String, String>{
+            'nombre': nombre,
+            'developer': developer,
+            'descripcion': descripcion,
+            'img_url': img,
+            'lanzamiento': launch,
+          }));
+      return json.decode(respuesta.body);
+    } else {
+      var respuesta = await http.post(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+          body: jsonEncode(<String, String>{
+            'nombre': nombre,
+            'developer': developer,
+            'descripcion': descripcion,
+            'lanzamiento': launch,
+          }));
+      return json.decode(respuesta.body);
+    }
+  }
+
+  Future<LinkedHashMap<String, dynamic>> updatePersonaje(
+      String id, nombre, ocurrence, genero, creator, raza, img) async {
     var uri = Uri.parse('$apiUrl/personajes/$id');
-    if (img != '' ) {
+    if (img != '') {
       var respuesta = await http.put(uri,
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -113,7 +150,7 @@ class MarioProvider {
             'raza': raza,
           }));
       return json.decode(respuesta.body);
-    } 
+    }
   }
   Future<LinkedHashMap<String, dynamic>> destroyElementPivot(int id,String nombre) async {
     var uri = Uri.parse('$apiUrl/juegos/$id/pivot/$nombre');

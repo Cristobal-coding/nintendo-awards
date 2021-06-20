@@ -3,33 +3,34 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
-class FormPersonaje extends StatefulWidget {
-  FormPersonaje({Key key}) : super(key: key);
+class FormGame extends StatefulWidget {
+  FormGame({Key key}) : super(key: key);
 
   @override
-  _FormPersonajeState createState() => _FormPersonajeState();
+  _FormGameState createState() => _FormGameState();
 }
 
-class _FormPersonajeState extends State<FormPersonaje> {
+class _FormGameState extends State<FormGame> {
   TextEditingController nombreCtrl = new TextEditingController();
-  TextEditingController occurrenceCtrl = new TextEditingController();
-  TextEditingController generoCtrl = new TextEditingController();
-  TextEditingController creatorCtrl = new TextEditingController();
-  TextEditingController razaCtrl = new TextEditingController();
+  TextEditingController developerCtrl = new TextEditingController();
+  TextEditingController descripcionCtrl = new TextEditingController();
   TextEditingController imgCtrl = new TextEditingController();
+
+  TextEditingController lanzamientoCtrl = new TextEditingController();
   String errorNombre = '';
-  String errorOcurrence = '';
-  String errorGenero = '';
-  String errorCreator = '';
-  String errorRaza = '';
+  String errorDeveloper = '';
+  String errorDescripcion = '';
   String errorImg = '';
+  String errorLanzamiento = '';
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          'Nuevo Personaje',
+          'Nuevo Juego',
         ),
       ),
       body: Padding(
@@ -41,10 +42,10 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: TextField(
                 controller: nombreCtrl,
                 decoration: InputDecoration(
-                    labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Nombre del Personaje',
-                    hintText: 'Nombre único'),
+                  labelStyle: TextStyle(color: nintendoPrimaryColor),
+                  hintStyle: TextStyle(color: nintendoIconsColor),
+                  labelText: 'Nombre del juego',
+                ),
                 style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
@@ -62,12 +63,12 @@ class _FormPersonajeState extends State<FormPersonaje> {
             // Input Text First Aparicion
             Container(
               child: TextField(
-                controller: occurrenceCtrl,
+                controller: developerCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Primera Aparición(Fecha)',
-                    hintText: 'Ejem: 23-09-2021'),
+                    labelText: 'Developer',
+                    hintText: 'Empresa desarrolladora'),
                 style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
@@ -75,7 +76,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
               padding: EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  errorOcurrence,
+                  errorDescripcion,
                   style: TextStyle(
                       color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
@@ -85,12 +86,13 @@ class _FormPersonajeState extends State<FormPersonaje> {
             // Input Text First Aparicion
             Container(
               child: TextField(
-                controller: generoCtrl,
+                maxLines: 6,
+                controller: descripcionCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Genero',
-                    hintText: 'Masculino | Femenino'),
+                    labelText: 'Descripcion',
+                    hintText: 'Breve descripcion del juego'),
                 style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
@@ -98,53 +100,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
               padding: EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  errorGenero,
-                  style: TextStyle(
-                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            // Input Text First Aparicion
-            // Input Text First Aparicion
-            Container(
-              child: TextField(
-                controller: creatorCtrl,
-                decoration: InputDecoration(
-                    labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Creador | Diseñador',
-                    hintText: 'Ejem: Eiji Aonuma'),
-                style: TextStyle(color: nintendoPrimaryColor),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Center(
-                child: Text(
-                  errorCreator,
-                  style: TextStyle(
-                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            // Input Text First Aparicion
-            // Input Text First Aparicion
-            Container(
-              child: TextField(
-                controller: razaCtrl,
-                decoration: InputDecoration(
-                    labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Raza',
-                    hintText: 'Ejem: Humana'),
-                style: TextStyle(color: nintendoPrimaryColor),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Center(
-                child: Text(
-                  errorRaza,
+                  errorDescripcion,
                   style: TextStyle(
                       color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
@@ -174,6 +130,30 @@ class _FormPersonajeState extends State<FormPersonaje> {
               ),
             ),
             // Input Text First Aparicion
+            // Input Text First Aparicion
+            Container(
+              child: TextField(
+                controller: lanzamientoCtrl,
+                decoration: InputDecoration(
+                    labelStyle: TextStyle(color: nintendoPrimaryColor),
+                    hintStyle: TextStyle(color: nintendoIconsColor),
+                    labelText: 'Fecha de lanzamiento',
+                    hintText: 'Ejem: 2021-06-16'),
+                style: TextStyle(color: nintendoPrimaryColor),
+              ),
+            ),
+
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Center(
+                child: Text(
+                  errorImg,
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            // Input Text First Aparicion
 
             Container(
               width: double.infinity,
@@ -182,7 +162,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
                   primary: nintendoPrimaryColor,
                 ),
                 child: Text('Agregar personaje'),
-                onPressed: () => createPersonaje(context),
+                onPressed: () {},
               ),
             ),
           ],
@@ -190,10 +170,12 @@ class _FormPersonajeState extends State<FormPersonaje> {
       ),
     );
   }
+}
 
-  void createPersonaje(BuildContext context) async {
+
+void createPersonaje(BuildContext context) async {
     MarioProvider provider = new MarioProvider();
-    var data = await provider.addPersonaje(
+    var data = await provider.addJuego(
         nombreCtrl.value.text,
         occurrenceCtrl.value.text,
         generoCtrl.value.text,

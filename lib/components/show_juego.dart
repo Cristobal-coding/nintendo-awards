@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nintendo_awards/constants.dart';
+import 'package:nintendo_awards/pages/games_add_personajes.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
 class ShowJuego extends StatefulWidget {
@@ -42,11 +43,9 @@ class _ShowJuegoState extends State<ShowJuego> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.all(10.0),
-                          child: Image.network(
-                            snapshot.data['img_url'],
-                            width: 140,
-                            height: 220,
-                          ),
+                          child: Image.network(snapshot.data['img_url'],
+                              width: size.width * 0.4,
+                              height: size.height * 0.28),
                         ),
                         Spacer(),
                         Column(
@@ -73,10 +72,9 @@ class _ShowJuegoState extends State<ShowJuego> {
                             ),
                             Container(
                               child: ElevatedButton(
-                                onPressed: (){},
+                                onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                  primary: nintendoPrimaryColor
-                                ),
+                                    primary: nintendoPrimaryColor),
                                 child: Text('Editar Datos'),
                               ),
                             ),
@@ -132,21 +130,29 @@ class _ShowJuegoState extends State<ShowJuego> {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           child: Text(
                             'Lista de Personajes',
-                            style:
-                                TextStyle(fontSize: 21, color: nintendoPrimaryColor),
+                            style: TextStyle(
+                                fontSize: 21, color: nintendoPrimaryColor),
                           ),
                         ),
                         Spacer(),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 0),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: nintendoPrimaryColor
-                            ),
-                            onPressed: (){},
+                                primary: nintendoPrimaryColor),
+                            onPressed: () {
+                              goEditJuego(
+                                  context,
+                                  snapshot.data['nombre'],
+                                  snapshot.data['id'],
+                                  snapshot.data['personajes']);
+                              print("entró");
+                            },
                             child: Text('Añadir'),
                           ),
                         )
@@ -154,10 +160,12 @@ class _ShowJuegoState extends State<ShowJuego> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: size.height * 0.35,
+                      height: size.height * 0.25,
                       child: ListView.separated(
                         separatorBuilder: (context, index) => Divider(),
-                        itemCount: snapshot.data['personajes'].length != 0?snapshot.data['personajes'].length:1,
+                        itemCount: snapshot.data['personajes'].length != 0
+                            ? snapshot.data['personajes'].length
+                            : 1,
                         itemBuilder: (context, index) {
                           if (snapshot.data['personajes'].length == 0) {
                             print('holaa');
@@ -167,10 +175,10 @@ class _ShowJuegoState extends State<ShowJuego> {
                               title: Text('No se han agredado Personajes'),
                               // subtitle: Text('Por favor añada con el botón'),
                             );
-                          }else{
+                          } else {
                             return ListTile(
-                              leading: Image.network(
-                                  snapshot.data['personajes'][index]['img_url']),
+                              leading: Image.network(snapshot.data['personajes']
+                                  [index]['img_url']),
                               title: Text(
                                   snapshot.data['personajes'][index]['nombre']),
                               subtitle: Text(snapshot.data['personajes'][index]
@@ -187,4 +195,15 @@ class _ShowJuegoState extends State<ShowJuego> {
       ),
     );
   }
+}
+
+void goEditJuego(
+    BuildContext context, String nombre, int id, List<dynamic> personajes) {
+  final route = new MaterialPageRoute(
+      builder: (context) => GamesAddPersonajes(
+            nombre: nombre,
+            id: id,
+            personajes: personajes,
+          ));
+  Navigator.push(context, route);
 }
