@@ -42,10 +42,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: nombreCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Nombre del Personaje',
                     hintText: 'Nombre único'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -65,10 +63,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: occurrenceCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Primera Aparición(Fecha)',
                     hintText: 'Ejem: 23-09-2021'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -88,10 +84,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: generoCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Genero',
                     hintText: 'Masculino | Femenino'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -111,10 +105,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: creatorCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Creador | Diseñador',
                     hintText: 'Ejem: Eiji Aonuma'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -134,10 +126,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: razaCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Raza',
                     hintText: 'Ejem: Humana'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -157,10 +147,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 controller: imgCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Url Imagen(Opcional)',
                     hintText: 'Ejem: https://imgur.com/a/O9jQnN9'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(

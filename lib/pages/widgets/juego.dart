@@ -30,7 +30,7 @@ class Juego extends StatelessWidget {
         //   )
         // ],
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit: pathImage.contains('GnkzOs4')? BoxFit.fitWidth : BoxFit.fill,
           image:  NetworkImage(pathImage, )
         ),
       ),

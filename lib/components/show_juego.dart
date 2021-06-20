@@ -192,7 +192,8 @@ class _ShowJuegoState extends State<ShowJuego> {
                           } else {
                             return ListTile(
                               leading: Image.network(snapshot.data['personajes']
-                                  [index]['img_url']),
+                                  [index]['img_url'] !=null?snapshot.data['personajes']
+                                  [index]['img_url']:'https://i.imgur.com/GnkzOs4.png'),
                               title: Text(
                                   snapshot.data['personajes'][index]['nombre']),
                               subtitle: Text(snapshot.data['personajes'][index]

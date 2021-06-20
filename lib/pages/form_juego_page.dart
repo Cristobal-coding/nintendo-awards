@@ -42,10 +42,8 @@ class _FormGameState extends State<FormGame> {
                 controller: nombreCtrl,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: nintendoPrimaryColor),
-                  hintStyle: TextStyle(color: nintendoIconsColor),
                   labelText: 'Nombre del juego',
                 ),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -65,57 +63,28 @@ class _FormGameState extends State<FormGame> {
                 controller: developerCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Developer',
                     hintText: 'Empresa desarrolladora'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
               padding: EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  errorDescripcion,
+                  errorDeveloper,
                   style: TextStyle(
                       color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            // Input Text First Aparicion
-            // Input Text First Aparicion
-            Container(
-              child: TextField(
-                maxLines: 6,
-                controller: descripcionCtrl,
-                decoration: InputDecoration(
-                    labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Descripcion',
-                    hintText: 'Breve descripcion del juego'),
-                style: TextStyle(color: nintendoPrimaryColor),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Center(
-                child: Text(
-                  errorDescripcion,
-                  style: TextStyle(
-                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            // Input Text First Aparicion
-            // Input Text First Aparicion
+
             Container(
               child: TextField(
                 controller: imgCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Url Imagen(Opcional)',
                     hintText: 'Ejem: https://imgur.com/a/O9jQnN9'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -128,25 +97,41 @@ class _FormGameState extends State<FormGame> {
                 ),
               ),
             ),
-            // Input Text First Aparicion
-            // Input Text First Aparicion
             Container(
               child: TextField(
                 controller: lanzamientoCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Fecha de lanzamiento',
                     hintText: 'Ejem: 01-06-2016'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
-
             Container(
               padding: EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
                   errorLanzamiento,
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            // Input Text First Aparicion
+            Container(
+              child: TextField(
+                maxLines: 6,
+                controller: descripcionCtrl,
+                decoration: InputDecoration(
+                    labelStyle: TextStyle(color: nintendoPrimaryColor),
+                    labelText: 'Descripcion',
+                    hintText: 'Breve descripcion del juego'),
+              ),
+            ),           
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Center(
+                child: Text(
+                  errorDescripcion,
                   style: TextStyle(
                       color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
@@ -160,7 +145,7 @@ class _FormGameState extends State<FormGame> {
                 style: ElevatedButton.styleFrom(
                   primary: nintendoPrimaryColor,
                 ),
-                child: Text('Agregar personaje'),
+                child: Text('Agregar juego'),
                 onPressed: () {
                   createJuego(context);
                 },
