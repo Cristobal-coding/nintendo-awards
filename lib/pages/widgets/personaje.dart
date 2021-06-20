@@ -30,7 +30,7 @@ class Personaje extends StatelessWidget {
         //   )
         // ],
         image: DecorationImage(
-          fit: BoxFit.fill,
+          fit:  pathImage.contains('GnkzOs4')? BoxFit.fitWidth : BoxFit.fill,
           // image:  CircularProgressIndicator()
           image:  NetworkImage(pathImage, )
         ),

@@ -139,7 +139,10 @@ class _MarioPageState extends State<MarioPage> {
                               context, snapshot.data['results'][index]['id']);
                         },
                         child: Juego(
-                          pathImage: snapshot.data['results'][index]['img_url'],
+                          pathImage:
+                              snapshot.data['results'][index]['img_url'] != null
+                                  ? snapshot.data['results'][index]['img_url']
+                                  : 'https://i.imgur.com/GnkzOs4.png',
                           genero: snapshot.data['results'][index]['developer'],
                           nombre: snapshot.data['results'][index]['nombre'],
                           fecha: snapshot.data['results'][index]['lanzamiento'],
