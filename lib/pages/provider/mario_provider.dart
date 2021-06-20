@@ -146,6 +146,7 @@ class MarioProvider {
             'developer': developer,
             'descripcion': descripcion,
             'lanzamiento': launch,
+            'img_url_aux': null,
           }));
       return json.decode(respuesta.body);
     }
@@ -181,6 +182,7 @@ class MarioProvider {
             'genero': genero,
             'creator': creator,
             'raza': raza,
+            'img_url_aux': null,
           }));
       return json.decode(respuesta.body);
     }
