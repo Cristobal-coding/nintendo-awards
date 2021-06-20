@@ -177,30 +177,28 @@ class MarioProvider {
       return null;
     }
   }
-<<<<<<< HEAD
 
   Future<LinkedHashMap<String, dynamic>> addElementPivot(
       int id, List<String> personajes) async {
     var uri = Uri.parse('$apiUrl/juegos/$id/new/$personajes');
     var respuesta = await http.post(uri);
-=======
->>>>>>> 3273432ebf7ce9edc043337ce85ad986a7ca1ca6
 
-  Future<LinkedHashMap<String, dynamic>> addElementPivot(
-      int id, String personajes) async {
-    var uri = Uri.parse('$apiUrl/juegos/$id/new/');
-    var respuesta = await http.post(uri,
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json',
-        },
-        body: jsonEncode(<String, String>{
-          'personajes': personajes,
-        }));
-    if (respuesta.statusCode == 200) {
-      return json.decode(respuesta.body);
-    } else {
-      return null;
+    Future<LinkedHashMap<String, dynamic>> addElementPivot(
+        int id, String personajes) async {
+      var uri = Uri.parse('$apiUrl/juegos/$id/new/');
+      var respuesta = await http.post(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+          body: jsonEncode(<String, String>{
+            'personajes': personajes,
+          }));
+      if (respuesta.statusCode == 200) {
+        return json.decode(respuesta.body);
+      } else {
+        return null;
+      }
     }
   }
 }
