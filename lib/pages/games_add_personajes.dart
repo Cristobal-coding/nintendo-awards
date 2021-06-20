@@ -111,7 +111,7 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
               Container(
                 child: ElevatedButton(
                   onPressed: () {
-                    addAllPersonajes();
+                    addAllPersonajes(context);
                   },
                   child: Text("Añadir personajes"),
                 ),
@@ -123,9 +123,14 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
     );
   }
 
-  void addAllPersonajes() async {
+  void addAllPersonajes(BuildContext context) async {
     MarioProvider mario = new MarioProvider();
-    await mario.addElementPivot(widget.id, personajesChecked);
+    String personajes='';
+    for(var i in personajesChecked){
+      personajes=personajes +','+ i;
+    }
+    print(personajes);
+    await mario.addElementPivot(widget.id, personajes);
     setState(() {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

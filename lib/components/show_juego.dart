@@ -195,15 +195,17 @@ class _ShowJuegoState extends State<ShowJuego> {
       ),
     );
   }
+  void goEditJuego(
+      BuildContext context, String nombre, int id, List<dynamic> personajes) {
+    final route = new MaterialPageRoute(
+        builder: (context) => GamesAddPersonajes(
+              nombre: nombre,
+              id: id,
+              personajes: personajes,
+            ));
+    Navigator.push(context, route).then((value) {
+      setState(() {});
+    });
+  }
 }
 
-void goEditJuego(
-    BuildContext context, String nombre, int id, List<dynamic> personajes) {
-  final route = new MaterialPageRoute(
-      builder: (context) => GamesAddPersonajes(
-            nombre: nombre,
-            id: id,
-            personajes: personajes,
-          ));
-  Navigator.push(context, route);
-}
