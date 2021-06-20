@@ -60,10 +60,8 @@ class _EditJuegoState extends State<EditJuego> {
                 controller: nombreCtrl,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(color: nintendoPrimaryColor),
-                  hintStyle: TextStyle(color: nintendoIconsColor),
                   labelText: 'Nombre del juego',
                 ),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -83,10 +81,8 @@ class _EditJuegoState extends State<EditJuego> {
                 controller: developerCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Developer',
                     hintText: 'Empresa desarrolladora'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -101,28 +97,6 @@ class _EditJuegoState extends State<EditJuego> {
             ),
             // Input Text First Aparicion
             // Input Text First Aparicion
-            Container(
-              child: TextField(
-                maxLines: 6,
-                controller: descripcionCtrl,
-                decoration: InputDecoration(
-                    labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
-                    labelText: 'Descripcion',
-                    hintText: 'Breve descripcion del juego'),
-                style: TextStyle(color: nintendoPrimaryColor),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Center(
-                child: Text(
-                  errorDescripcion,
-                  style: TextStyle(
-                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
             // Input Text First Aparicion
             // Input Text First Aparicion
             Container(
@@ -130,10 +104,8 @@ class _EditJuegoState extends State<EditJuego> {
                 controller: imgCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Url Imagen(Opcional)',
                     hintText: 'Ejem: https://imgur.com/a/O9jQnN9'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
             Container(
@@ -153,10 +125,8 @@ class _EditJuegoState extends State<EditJuego> {
                 controller: lanzamientoCtrl,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
-                    hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Fecha de lanzamiento',
                     hintText: 'Ejem: 01-06-2016'),
-                style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
 
@@ -171,7 +141,26 @@ class _EditJuegoState extends State<EditJuego> {
               ),
             ),
             // Input Text First Aparicion
-
+            Container(
+              child: TextField(
+                maxLines: 6,
+                controller: descripcionCtrl,
+                decoration: InputDecoration(
+                    labelStyle: TextStyle(color: nintendoPrimaryColor),
+                    labelText: 'Descripcion',
+                    hintText: 'Breve descripcion del juego'),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+              child: Center(
+                child: Text(
+                  errorDescripcion,
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
             Container(
               width: double.infinity,
               child: ElevatedButton(
