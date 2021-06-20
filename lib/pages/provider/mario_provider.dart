@@ -118,6 +118,39 @@ class MarioProvider {
     }
   }
 
+  Future<LinkedHashMap<String, dynamic>> updateJuego(
+      int id, String nombre, developer, descripcion, img, launch) async {
+    var uri = Uri.parse('$apiUrl/juegos/$id');
+    if (img != '') {
+      var respuesta = await http.put(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+          body: jsonEncode(<String, String>{
+            'nombre': nombre,
+            'developer': developer,
+            'descripcion': descripcion,
+            'img_url': img,
+            'lanzamiento': launch,
+          }));
+      return json.decode(respuesta.body);
+    } else {
+      var respuesta = await http.put(uri,
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+          body: jsonEncode(<String, String>{
+            'nombre': nombre,
+            'developer': developer,
+            'descripcion': descripcion,
+            'lanzamiento': launch,
+          }));
+      return json.decode(respuesta.body);
+    }
+  }
+
   Future<LinkedHashMap<String, dynamic>> updatePersonaje(
       String id, nombre, ocurrence, genero, creator, raza, img) async {
     var uri = Uri.parse('$apiUrl/personajes/$id');
