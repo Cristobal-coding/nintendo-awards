@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nintendo_awards/components/edit_juego.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/games_add_personajes.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
@@ -64,8 +65,8 @@ class _ShowJuegoState extends State<ShowJuego> {
                                   )),
                             ),
                             Container(
-                              width: 200,
-                              height: 120,
+                              width: size.width * 0.55,
+                              height: size.height * 0.21,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
@@ -76,7 +77,16 @@ class _ShowJuegoState extends State<ShowJuego> {
                             ),
                             Container(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  goEditJuego(
+                                      context,
+                                      snapshot.data['id'],
+                                      snapshot.data['nombre'],
+                                      snapshot.data['developer'],
+                                      snapshot.data['descripcion'],
+                                      snapshot.data['img_url'],
+                                      snapshot.data['lanzamiento']);
+                                },
                                 style: ElevatedButton.styleFrom(
                                     primary: nintendoPrimaryColor),
                                 child: Text('Editar Datos'),
@@ -150,7 +160,7 @@ class _ShowJuegoState extends State<ShowJuego> {
                             style: ElevatedButton.styleFrom(
                                 primary: nintendoPrimaryColor),
                             onPressed: () {
-                              goEditJuego(
+                              goEditPersonajesJuego(
                                   context,
                                   snapshot.data['nombre'],
                                   snapshot.data['id'],
@@ -200,13 +210,29 @@ class _ShowJuegoState extends State<ShowJuego> {
     );
   }
 
-  void goEditJuego(
+  void goEditPersonajesJuego(
       BuildContext context, String nombre, int id, List<dynamic> personajes) {
     final route = new MaterialPageRoute(
         builder: (context) => GamesAddPersonajes(
               nombre: nombre,
               id: id,
               personajes: personajes,
+            ));
+    Navigator.push(context, route).then((value) {
+      setState(() {});
+    });
+  }
+
+  void goEditJuego(BuildContext context, int id, String nombre, developer,
+      descripcion, img, lanzamientos) {
+    final route = new MaterialPageRoute(
+        builder: (context) => EditJuego(
+              id: id,
+              nombre: nombre,
+              developer: developer,
+              descripcion: descripcion,
+              img: img,
+              lanzamiento: lanzamientos,
             ));
     Navigator.push(context, route).then((value) {
       setState(() {});
