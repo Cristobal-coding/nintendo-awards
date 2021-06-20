@@ -152,7 +152,9 @@ class MarioProvider {
       return json.decode(respuesta.body);
     }
   }
-  Future<LinkedHashMap<String, dynamic>> destroyElementPivot(int id,String nombre) async {
+
+  Future<LinkedHashMap<String, dynamic>> destroyElementPivot(
+      int id, String nombre) async {
     var uri = Uri.parse('$apiUrl/juegos/$id/pivot/$nombre');
     var respuesta = await http.delete(uri);
 
@@ -162,8 +164,11 @@ class MarioProvider {
       return null;
     }
   }
-  Future<LinkedHashMap<String, dynamic>> updateElementPivot(int id,String nombre,previousNombre) async {
-    var uri = Uri.parse('$apiUrl/juegos/$id/update/$nombre/previous/$previousNombre');
+
+  Future<LinkedHashMap<String, dynamic>> updateElementPivot(
+      int id, String nombre, previousNombre) async {
+    var uri =
+        Uri.parse('$apiUrl/juegos/$id/update/$nombre/previous/$previousNombre');
     var respuesta = await http.put(uri);
 
     if (respuesta.statusCode == 200) {
@@ -172,7 +177,9 @@ class MarioProvider {
       return null;
     }
   }
-  Future<LinkedHashMap<String, dynamic>> addElementPivot(int id,List<String> personajes) async {
+
+  Future<LinkedHashMap<String, dynamic>> addElementPivot(
+      int id, List<String> personajes) async {
     var uri = Uri.parse('$apiUrl/juegos/$id/new/$personajes');
     var respuesta = await http.post(uri);
 

@@ -15,7 +15,6 @@ class _FormGameState extends State<FormGame> {
   TextEditingController developerCtrl = new TextEditingController();
   TextEditingController descripcionCtrl = new TextEditingController();
   TextEditingController imgCtrl = new TextEditingController();
-
   TextEditingController lanzamientoCtrl = new TextEditingController();
   String errorNombre = '';
   String errorDeveloper = '';
@@ -138,7 +137,7 @@ class _FormGameState extends State<FormGame> {
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     hintStyle: TextStyle(color: nintendoIconsColor),
                     labelText: 'Fecha de lanzamiento',
-                    hintText: 'Ejem: 2021-06-16'),
+                    hintText: 'Ejem: 01-06-2016'),
                 style: TextStyle(color: nintendoPrimaryColor),
               ),
             ),
@@ -147,7 +146,7 @@ class _FormGameState extends State<FormGame> {
               padding: EdgeInsets.only(top: 10),
               child: Center(
                 child: Text(
-                  errorImg,
+                  errorLanzamiento,
                   style: TextStyle(
                       color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
