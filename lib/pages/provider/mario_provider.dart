@@ -135,8 +135,8 @@ class MarioProvider {
       return null;
     }
   }
-  Future<LinkedHashMap<String, dynamic>> addElementPivot(int id,String nombre) async {
-    var uri = Uri.parse('$apiUrl/juegos/$id/new/$nombre');
+  Future<LinkedHashMap<String, dynamic>> addElementPivot(int id,List<String> personajes) async {
+    var uri = Uri.parse('$apiUrl/juegos/$id/new/$personajes');
     var respuesta = await http.post(uri);
 
     if (respuesta.statusCode == 200) {
