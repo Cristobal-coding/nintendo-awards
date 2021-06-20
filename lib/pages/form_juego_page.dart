@@ -162,7 +162,9 @@ class _FormGameState extends State<FormGame> {
                   primary: nintendoPrimaryColor,
                 ),
                 child: Text('Agregar personaje'),
-                onPressed: () {},
+                onPressed: () {
+                  createJuego(context);
+                },
               ),
             ),
           ],
@@ -170,34 +172,31 @@ class _FormGameState extends State<FormGame> {
       ),
     );
   }
-}
 
-
-void createPersonaje(BuildContext context) async {
+  void createJuego(BuildContext context) async {
     MarioProvider provider = new MarioProvider();
     var data = await provider.addJuego(
-        nombreCtrl.value.text,
-        occurrenceCtrl.value.text,
-        generoCtrl.value.text,
-        creatorCtrl.value.text,
-        razaCtrl.value.text,
-        imgCtrl.value.text);
+      nombreCtrl.value.text,
+      developerCtrl.value.text,
+      descripcionCtrl.value.text,
+      imgCtrl.value.text,
+      lanzamientoCtrl.value.text,
+    );
     if (data['message'] != null) {
       setState(() {
         errorNombre =
             data['errors']['nombre'] != null ? data['errors']['nombre'][0] : '';
-        errorOcurrence = data['errors']['occurrence'] != null
-            ? data['errors']['occurrence'][0]
+        errorDeveloper = data['errors']['developer'] != null
+            ? data['errors']['developer'][0]
             : '';
-        errorGenero =
-            data['errors']['genero'] != null ? data['errors']['genero'][0] : '';
-        errorCreator = data['errors']['creator'] != null
-            ? data['errors']['creator'][0]
+        errorDescripcion = data['errors']['descripcion'] != null
+            ? data['errors']['descripcion'][0]
             : '';
-        errorRaza =
-            data['errors']['raza'] != null ? data['errors']['raza'][0] : '';
         errorImg = data['errors']['img_url'] != null
             ? data['errors']['img_url'][0]
+            : '';
+        errorLanzamiento = data['errors']['lanzamiento'] != null
+            ? data['errors']['lanzamiento'][0]
             : '';
       });
     } else {
@@ -208,7 +207,7 @@ void createPersonaje(BuildContext context) async {
             children: [
               Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
               Text(
-                ' Personaje Agregado correctamente.',
+                ' Juego Agregado correctamente.',
                 style: TextStyle(color: Colors.white),
               ),
             ],
