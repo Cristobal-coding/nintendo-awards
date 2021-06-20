@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 
 class GamesAddPersonajes extends StatefulWidget {
@@ -108,7 +110,9 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
               Spacer(),
               Container(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    addAllPersonajes();
+                  },
                   child: Text("Añadir personajes"),
                 ),
               )
@@ -117,5 +121,29 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
         )
       ]),
     );
+  }
+
+  void addAllPersonajes() async {
+    MarioProvider mario = new MarioProvider();
+    await mario.addElementPivot(widget.id, personajesChecked);
+    setState(() {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
+              Text(
+                ' Personajes Actualizados.',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          backgroundColor: nintendoStar,
+        ),
+      );
+      Navigator.pop(
+        context,
+      );
+    });
   }
 }
