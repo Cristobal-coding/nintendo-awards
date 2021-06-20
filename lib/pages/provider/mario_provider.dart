@@ -4,7 +4,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 class MarioProvider {
-  final String apiUrl = 'http://192.168.0.7:8000/api';
+  final String apiUrl = 'http://10.0.2.2:8000/api';
 
   Future<LinkedHashMap<String, dynamic>> getAll(String set) async {
     var uri = Uri.parse('$apiUrl/$set');

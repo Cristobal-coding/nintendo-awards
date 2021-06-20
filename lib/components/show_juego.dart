@@ -42,7 +42,8 @@ class _ShowJuegoState extends State<ShowJuego> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4),
                           child: Image.network(snapshot.data['img_url'],
                               width: size.width * 0.4,
                               height: size.height * 0.28),
@@ -54,10 +55,13 @@ class _ShowJuegoState extends State<ShowJuego> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 30, vertical: 0),
                               child: Container(
-                                  child: Text(
-                                snapshot.data['nombre'],
-                                style: TextStyle(fontSize: 30),
-                              )),
+                                  width: size.width * 0.4,
+                                  child: FittedBox(
+                                    child: Text(
+                                      snapshot.data['nombre'],
+                                      style: TextStyle(fontSize: 30),
+                                    ),
+                                  )),
                             ),
                             Container(
                               width: 200,
@@ -196,6 +200,7 @@ class _ShowJuegoState extends State<ShowJuego> {
       ),
     );
   }
+
   void goEditJuego(
       BuildContext context, String nombre, int id, List<dynamic> personajes) {
     final route = new MaterialPageRoute(
@@ -209,4 +214,3 @@ class _ShowJuegoState extends State<ShowJuego> {
     });
   }
 }
-
