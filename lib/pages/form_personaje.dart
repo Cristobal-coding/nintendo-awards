@@ -53,8 +53,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorNombre,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -76,8 +76,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorOcurrence,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -99,8 +99,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorGenero,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -122,8 +122,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorCreator,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -145,8 +145,8 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorRaza,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -168,13 +168,13 @@ class _FormPersonajeState extends State<FormPersonaje> {
               child: Center(
                 child: Text(
                   errorImg,
-                  style:
-                      TextStyle(color: nintendoIconsColor, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: nintendoIconsColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             // Input Text First Aparicion
-            Spacer(),
+
             Container(
               width: double.infinity,
               child: ElevatedButton(
@@ -182,7 +182,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
                   primary: nintendoPrimaryColor,
                 ),
                 child: Text('Agregar personaje'),
-                onPressed: () =>createPersonaje(context),
+                onPressed: () => createPersonaje(context),
               ),
             ),
           ],
@@ -193,39 +193,47 @@ class _FormPersonajeState extends State<FormPersonaje> {
 
   void createPersonaje(BuildContext context) async {
     MarioProvider provider = new MarioProvider();
-    var data =await provider.addPersonaje(
-      nombreCtrl.value.text,
-      occurrenceCtrl.value.text,
-      generoCtrl.value.text,
-      creatorCtrl.value.text,
-      razaCtrl.value.text,
-      imgCtrl.value.text
-    );
-    if (data['message'] != null){
+    var data = await provider.addPersonaje(
+        nombreCtrl.value.text,
+        occurrenceCtrl.value.text,
+        generoCtrl.value.text,
+        creatorCtrl.value.text,
+        razaCtrl.value.text,
+        imgCtrl.value.text);
+    if (data['message'] != null) {
       setState(() {
-        errorNombre= data['errors']['nombre']!= null?data['errors']['nombre'][0]:''; 
-        errorOcurrence= data['errors']['occurrence'] != null?data['errors']['occurrence'][0]:''; 
-        errorGenero= data['errors']['genero']!= null?data['errors']['genero'][0]:''; 
-        errorCreator= data['errors']['creator']!= null?data['errors']['creator'][0]:''; 
-        errorRaza= data['errors']['raza']!= null?data['errors']['raza'][0]:''; 
-        errorImg= data['errors']['img_url']!= null?data['errors']['img_url'][0]:''; 
+        errorNombre =
+            data['errors']['nombre'] != null ? data['errors']['nombre'][0] : '';
+        errorOcurrence = data['errors']['occurrence'] != null
+            ? data['errors']['occurrence'][0]
+            : '';
+        errorGenero =
+            data['errors']['genero'] != null ? data['errors']['genero'][0] : '';
+        errorCreator = data['errors']['creator'] != null
+            ? data['errors']['creator'][0]
+            : '';
+        errorRaza =
+            data['errors']['raza'] != null ? data['errors']['raza'][0] : '';
+        errorImg = data['errors']['img_url'] != null
+            ? data['errors']['img_url'][0]
+            : '';
       });
-    }else{
+    } else {
       Navigator.pop(context);
-     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
-            Text(
-              ' Personaje Agregado correctamente.' ,
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
+              Text(
+                ' Personaje Agregado correctamente.',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          backgroundColor: nintendoStar,
         ),
-        backgroundColor: nintendoStar,
-      ),
-    );
+      );
     }
   }
 }

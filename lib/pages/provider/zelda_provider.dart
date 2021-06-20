@@ -7,7 +7,7 @@ class ZeldaProvider {
   final String apiUrl = 'https://zelda-api.apius.cc/api';
 
   Future<LinkedHashMap<String, dynamic>> getAllCharacters(int numero) async {
-    print('numero: $numero');
+    // print('numero: $numero');
     var uri = Uri.parse('$apiUrl/characters?limit=50&page=$numero');
 
     var respuesta = await http.get(uri);
