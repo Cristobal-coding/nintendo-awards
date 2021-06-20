@@ -173,49 +173,49 @@ class _FormGameState extends State<FormGame> {
 }
 
 
-void createPersonaje(BuildContext context) async {
-    MarioProvider provider = new MarioProvider();
-    var data = await provider.addJuego(
-        nombreCtrl.value.text,
-        occurrenceCtrl.value.text,
-        generoCtrl.value.text,
-        creatorCtrl.value.text,
-        razaCtrl.value.text,
-        imgCtrl.value.text);
-    if (data['message'] != null) {
-      setState(() {
-        errorNombre =
-            data['errors']['nombre'] != null ? data['errors']['nombre'][0] : '';
-        errorOcurrence = data['errors']['occurrence'] != null
-            ? data['errors']['occurrence'][0]
-            : '';
-        errorGenero =
-            data['errors']['genero'] != null ? data['errors']['genero'][0] : '';
-        errorCreator = data['errors']['creator'] != null
-            ? data['errors']['creator'][0]
-            : '';
-        errorRaza =
-            data['errors']['raza'] != null ? data['errors']['raza'][0] : '';
-        errorImg = data['errors']['img_url'] != null
-            ? data['errors']['img_url'][0]
-            : '';
-      });
-    } else {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Row(
-            children: [
-              Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
-              Text(
-                ' Personaje Agregado correctamente.',
-                style: TextStyle(color: Colors.white),
-              ),
-            ],
-          ),
-          backgroundColor: nintendoStar,
-        ),
-      );
-    }
-  }
-}
+// // void createPersonaje(BuildContext context) async {
+//     MarioProvider provider = new MarioProvider();
+//     var data = await provider.addJuego(
+//         nombreCtrl.value.text,
+//         occurrenceCtrl.value.text,
+//         generoCtrl.value.text,
+//         creatorCtrl.value.text,
+//         razaCtrl.value.text,
+//         imgCtrl.value.text);
+//     if (data['message'] != null) {
+//       setState(() {
+//         errorNombre =
+//             data['errors']['nombre'] != null ? data['errors']['nombre'][0] : '';
+//         errorOcurrence = data['errors']['occurrence'] != null
+//             ? data['errors']['occurrence'][0]
+//             : '';
+//         errorGenero =
+//             data['errors']['genero'] != null ? data['errors']['genero'][0] : '';
+//         errorCreator = data['errors']['creator'] != null
+//             ? data['errors']['creator'][0]
+//             : '';
+//         errorRaza =
+//             data['errors']['raza'] != null ? data['errors']['raza'][0] : '';
+//         errorImg = data['errors']['img_url'] != null
+//             ? data['errors']['img_url'][0]
+//             : '';
+//       });
+//     } else {
+//       Navigator.pop(context);
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         SnackBar(
+//           content: Row(
+//             children: [
+//               Icon(MdiIcons.alertCircleCheckOutline, color: Colors.white),
+//               Text(
+//                 ' Personaje Agregado correctamente.',
+//                 style: TextStyle(color: Colors.white),
+//               ),
+//             ],
+//           ),
+//           backgroundColor: nintendoStar,
+//         ),
+//       );
+//     }
+//   }
+// }
