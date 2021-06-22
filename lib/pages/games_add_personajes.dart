@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
+import 'package:nintendo_awards/pages/widgets/hongo_progress_indicator.dart';
 
 class GamesAddPersonajes extends StatefulWidget {
   GamesAddPersonajes({
@@ -79,7 +80,7 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
                               itemBuilder: (context, index) {
                                 if (index == snapshot.data['results'].length) {
                                   return Center(
-                                      child: LinearProgressIndicator());
+                                      child: HongoProgressIndicator(font: 50));
                                 } else {
                                   return CheckboxListTile(
                                     value: personajesChecked.contains(snapshot
@@ -125,9 +126,9 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
 
   void addAllPersonajes(BuildContext context) async {
     MarioProvider mario = new MarioProvider();
-    String personajes='';
-    for(var i in personajesChecked){
-      personajes=personajes +','+ i;
+    String personajes = '';
+    for (var i in personajesChecked) {
+      personajes = personajes + ',' + i;
     }
     print(personajes);
     await mario.addElementPivot(widget.id, personajes);

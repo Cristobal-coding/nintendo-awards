@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:nintendo_awards/components/edit_personaje.dart';
 import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
+import 'package:nintendo_awards/pages/widgets/hongo_progress_indicator.dart';
 
 class ShowPersonaje extends StatefulWidget {
   final String nombre;
@@ -28,7 +29,11 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
       future: mario.getOneById('personajes', nombreID),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return Container(
+              padding: EdgeInsets.only(top: 150),
+              child: HongoProgressIndicator(
+                font: 50,
+              ));
         } else {
           return Column(
             children: [
@@ -230,7 +235,7 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
     Navigator.push(context, route).then((value) {
       setState(() {
         print(value);
-        if (value!=null){
+        if (value != null) {
           nombreID = value;
         }
       });

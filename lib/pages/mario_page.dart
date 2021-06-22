@@ -5,6 +5,7 @@ import 'package:nintendo_awards/constants.dart';
 import 'package:nintendo_awards/pages/form_personaje.dart';
 import 'package:nintendo_awards/pages/provider/mario_provider.dart';
 import 'package:nintendo_awards/pages/show_by_id.dart';
+import 'package:nintendo_awards/pages/widgets/hongo_progress_indicator.dart';
 import 'package:nintendo_awards/pages/widgets/juego.dart';
 import 'package:nintendo_awards/pages/widgets/personaje.dart';
 
@@ -60,7 +61,7 @@ class _MarioPageState extends State<MarioPage> {
               future: mario.getAll('personajes'),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: HongoProgressIndicator(font: 50));
                 } else {
                   return ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -126,7 +127,7 @@ class _MarioPageState extends State<MarioPage> {
               future: mario.getAll('juegos'),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: HongoProgressIndicator(font: 50));
                 } else {
                   return ListView.separated(
                     scrollDirection: Axis.horizontal,
