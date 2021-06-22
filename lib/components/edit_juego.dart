@@ -82,7 +82,7 @@ class _EditJuegoState extends State<EditJuego> {
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     labelText: 'Developer',
-                    hintText: 'Empresa desarrolladora'),
+                    hintText: 'Empresa desarrolladora del juego'),
               ),
             ),
             Container(
