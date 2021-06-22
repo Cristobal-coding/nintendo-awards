@@ -52,7 +52,10 @@ class _ShowJuegoState extends State<ShowJuego> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8.0, vertical: 4),
-                              child: Image.network(snapshot.data['img_url'],
+                              child: Image.network(
+                                  snapshot.data['img_url'] != null
+                                      ? snapshot.data['img_url']
+                                      : 'https://i.imgur.com/GnkzOs4.png',
                                   width: size.width * 0.4,
                                   height: size.height * 0.28),
                             ),
