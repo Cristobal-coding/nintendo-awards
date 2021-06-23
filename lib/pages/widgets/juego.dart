@@ -18,31 +18,18 @@ class Juego extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 1.0, vertical: 8),
       width: 200,
-      height: 500,
-      decoration: BoxDecoration(
-        // borderRadius: BorderRadius.circular(30),
-        // boxShadow: [
-        //   BoxShadow(
-        //       color: nintendoIconsColor,
-        //       blurRadius: 4.0,
-        //       spreadRadius: 0.0,
-        //       offset: Offset(2.0, 1.0),
-        //   )
-        // ],
-        image: DecorationImage(
-            fit: pathImage.contains('GnkzOs4') ? BoxFit.fitWidth : BoxFit.fill,
-            image: NetworkImage(
-              pathImage,
-            )),
-      ),
+      height: size.height * 0.4,
       child: Stack(
         // clipBehavior: Clip.antiAliasWithSaveLayer,
         children: [
           Container(
             width: double.infinity,
             height: double.infinity,
+            decoration: BoxDecoration(),
             child: Image.network(
               pathImage,
+              fit:
+                  pathImage.contains('GnkzOs4') ? BoxFit.fitWidth : BoxFit.fill,
               loadingBuilder: (BuildContext context, Widget child,
                   ImageChunkEvent loadingProgress) {
                 if (loadingProgress == null) return child;
@@ -70,13 +57,16 @@ class Juego extends StatelessWidget {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      this.nombre,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        this.nombre,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25),
+                      ),
                     )
                     // Padding(
                     //   padding: const EdgeInsets.all(8.0),

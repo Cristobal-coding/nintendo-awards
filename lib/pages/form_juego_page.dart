@@ -84,7 +84,7 @@ class _FormGameState extends State<FormGame> {
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     labelText: 'Url Imagen(Opcional)',
-                    hintText: 'Ejem: https://imgur.com/a/O9jQnN9'),
+                    hintText: 'Ejem: https://imgur.com/a/O9jQnN9.png'),
               ),
             ),
             Container(
@@ -121,12 +121,13 @@ class _FormGameState extends State<FormGame> {
               child: TextField(
                 maxLines: 6,
                 controller: descripcionCtrl,
+                maxLength: 255,
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     labelText: 'Descripcion',
                     hintText: 'Breve descripcion del juego'),
               ),
-            ),           
+            ),
             Container(
               padding: EdgeInsets.only(top: 10),
               child: Center(

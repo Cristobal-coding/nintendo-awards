@@ -85,7 +85,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     labelText: 'Genero',
-                    hintText: 'Masculino | Femenino'),
+                    hintText: 'Masculino | Femenino | Otro'),
               ),
             ),
             Container(
@@ -148,7 +148,7 @@ class _FormPersonajeState extends State<FormPersonaje> {
                 decoration: InputDecoration(
                     labelStyle: TextStyle(color: nintendoPrimaryColor),
                     labelText: 'Url Imagen(Opcional)',
-                    hintText: 'Ejem: https://imgur.com/a/O9jQnN9'),
+                    hintText: 'Ejem: https://imgur.com/a/O9jQnN9.png'),
               ),
             ),
             Container(
