@@ -35,50 +35,71 @@ class Juego extends StatelessWidget {
               pathImage,
             )),
       ),
-      child: Column(
+      child: Stack(
+        // clipBehavior: Clip.antiAliasWithSaveLayer,
         children: [
-          Spacer(),
           Container(
             width: double.infinity,
-            height: 72,
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
-            decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.vertical(
-              //   top: Radius.circular(0),
-              //   bottom: Radius.circular(30),
-              // ),
-              color: nintendoPrimaryColor.withOpacity(0.8),
+            height: double.infinity,
+            child: Image.network(
+              pathImage,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    // backgroundColor: Colors.red,
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(nintendoPrimaryColor),
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes
+                        : null,
+                  ),
+                );
+              },
             ),
-            child: Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                    child: Text(
-                  this.nombre,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25),
-                )),
-                Row(
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              color: nintendoPrimaryColor.withOpacity(0.7),
+              height: size.height * 0.1,
+              width: size.width * 0.5,
+              child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      this.genero,
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                    Spacer(),
-                    // Icon(MdiIcons.cart, color: Colors.white,),
-                    Text(
-                      this.fecha,
+                    Expanded(
+                        child: Text(
+                      this.nombre,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                          fontSize: 25),
+                    )),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            this.genero,
+                            style: TextStyle(color: Colors.white, fontSize: 12),
+                          ),
+                          Spacer(),
+                          // Icon(MdiIcons.cart, color: Colors.white,),
+                          Text(
+                            this.fecha,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ],
+                  ]),
             ),
           ),
         ],

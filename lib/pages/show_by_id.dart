@@ -15,6 +15,8 @@ class _ShowByIdState extends State<ShowById> {
   @override
   Widget build(BuildContext context) {
     MarioProvider mario = new MarioProvider();
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Información'),
@@ -25,19 +27,19 @@ class _ShowByIdState extends State<ShowById> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-                height: 400,
+                height: size.height * 0.5,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: nintendoPrimaryColor,
                   gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        nintendoStar,
-                        nintendoPrimaryColor,
-                      ],
-                    ),
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      nintendoStar,
+                      nintendoPrimaryColor,
+                    ],
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: nintendoIconsColor,

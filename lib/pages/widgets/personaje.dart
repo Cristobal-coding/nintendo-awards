@@ -16,7 +16,7 @@ class Personaje extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 700,
         width: size.width * 0.5,
