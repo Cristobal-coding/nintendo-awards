@@ -89,6 +89,7 @@ class _ShowJuegoState extends State<ShowJuego> {
                           height: size.height * 0.34,
                           child: Column(
                             children: [
+                              Spacer(),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30, vertical: 0),
@@ -101,15 +102,14 @@ class _ShowJuegoState extends State<ShowJuego> {
                                       ),
                                     )),
                               ),
-                              Spacer(),
                               Container(
-                                width: size.width * 0.55,
-                                height: size.height * 0.21,
+                                width: size.width * 0.21,
+                                height: size.height * 0.10,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
                                     image:
-                                        AssetImage('assets/images/family4.png'),
+                                        AssetImage('assets/images/hongo.png'),
                                   ),
                                 ),
                               ),
