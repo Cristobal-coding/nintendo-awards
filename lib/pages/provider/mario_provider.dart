@@ -214,14 +214,14 @@ class MarioProvider {
   }
 
   Future<LinkedHashMap<String, dynamic>> addElementPivot(
-      int id, String personajes) async {
+      int id, List<String> personajes) async {
     var uri = Uri.parse('$apiUrl/juegos/$id/new/');
     var respuesta = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Accept': 'application/json',
         },
-        body: jsonEncode(<String, String>{
+        body: jsonEncode(<String, dynamic>{
           'personajes': personajes,
         }));
     if (respuesta.statusCode == 200) {
@@ -230,4 +230,21 @@ class MarioProvider {
       return null;
     }
   }
+  // Future<LinkedHashMap<String, dynamic>> addElementPivot(
+  //     int id, String personajes) async {
+  //   var uri = Uri.parse('$apiUrl/juegos/$id/new/');
+  //   var respuesta = await http.post(uri,
+  //       headers: <String, String>{
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //         'Accept': 'application/json',
+  //       },
+  //       body: jsonEncode(<String, String>{
+  //         'personajes': personajes,
+  //       }));
+  //   if (respuesta.statusCode == 200) {
+  //     return json.decode(respuesta.body);
+  //   } else {
+  //     return null;
+  //   }
+  // }
 }

@@ -21,7 +21,6 @@ class GamesAddPersonajes extends StatefulWidget {
 
 class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
   MarioProvider mario = new MarioProvider();
-  List<String> agregarList = [];
   List<String> personajesChecked = [];
 
   @override
@@ -126,12 +125,7 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
 
   void addAllPersonajes(BuildContext context) async {
     MarioProvider mario = new MarioProvider();
-    String personajes = '';
-    for (var i in personajesChecked) {
-      personajes = personajes + ',' + i;
-    }
-    print(personajes);
-    await mario.addElementPivot(widget.id, personajes);
+    await mario.addElementPivot(widget.id, personajesChecked);
     setState(() {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
