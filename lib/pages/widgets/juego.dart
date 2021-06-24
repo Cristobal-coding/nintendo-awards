@@ -63,42 +63,41 @@ class Juego extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Container(
-              color: nintendoPrimaryColor.withOpacity(0.7),
-              height: size.height * 0.1,
+              color: nintendoPrimaryColor.withOpacity(0.9),
+              height: size.height * 0.05,
               width: size.width * 0.5,
               child: Column(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                        child: Text(
+                    Text(
                       this.nombre,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 25),
-                    )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            this.genero,
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
-                          Spacer(),
-                          // Icon(MdiIcons.cart, color: Colors.white,),
-                          Text(
-                            this.fecha,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15),
-                          ),
-                        ],
-                      ),
-                    ),
+                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: Row(
+                    //     children: [
+                    //       Text(
+                    //         this.genero,
+                    //         style: TextStyle(color: Colors.white, fontSize: 12),
+                    //       ),
+                    //       Spacer(),
+                    //       // Icon(MdiIcons.cart, color: Colors.white,),
+                    //       Text(
+                    //         this.fecha,
+                    //         style: TextStyle(
+                    //             color: Colors.white,
+                    //             fontWeight: FontWeight.bold,
+                    //             fontSize: 15),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                   ]),
             ),
           ),

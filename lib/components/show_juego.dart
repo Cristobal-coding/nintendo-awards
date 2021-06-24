@@ -181,7 +181,7 @@ class _ShowJuegoState extends State<ShowJuego> {
                                     TextSpan(
                                       text: 'Descripcion: ',
                                       style: TextStyle(
-                                          fontSize: 24,
+                                          fontSize: 28,
                                           color: nintendoPrimaryColor),
                                     ),
                                     TextSpan(
