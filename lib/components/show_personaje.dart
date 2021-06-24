@@ -93,18 +93,21 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
                     ],
                   ),
                 ),
-                Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        'Primera Aparicion en: ',
-                        style: TextStyle(color: nintendoStar, fontSize: 20),
-                      ),
-                      Text(
-                        '${snapshot.data['occurrence']}',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text(
+                          'Primera Aparicion en: ',
+                          style: TextStyle(color: nintendoStar, fontSize: 20),
+                        ),
+                        Text(
+                          '${snapshot.data['occurrence']}',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -114,7 +117,7 @@ class _ShowPersonajeState extends State<ShowPersonaje> {
 
                     child: Column(
                       children: [
-                        Text('Creado por:',
+                        Text('Creador:',
                             style:
                                 TextStyle(fontSize: 30, color: Colors.white)),
                         Text(

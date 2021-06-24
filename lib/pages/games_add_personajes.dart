@@ -50,7 +50,7 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
               Container(
                   height: size.height * 0.03,
                   child: Text(
-                    "Añadir personajes a: ",
+                    "Gestionar personajes de: ",
                     style: TextStyle(fontSize: 20),
                   )),
               Container(
@@ -82,6 +82,7 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
                                       child: HongoProgressIndicator(font: 50));
                                 } else {
                                   return CheckboxListTile(
+                                    activeColor: nintendoPrimaryColor,
                                     value: personajesChecked.contains(snapshot
                                         .data['results'][index]['nombre']),
                                     title: Text(snapshot.data['results'][index]
@@ -110,6 +111,9 @@ class _GamesAddPersonajesState extends State<GamesAddPersonajes> {
               Spacer(),
               Container(
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: nintendoPrimaryColor
+                  ),
                   onPressed: () {
                     addAllPersonajes(context);
                   },

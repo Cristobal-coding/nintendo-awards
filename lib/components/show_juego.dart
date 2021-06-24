@@ -223,7 +223,7 @@ class _ShowJuegoState extends State<ShowJuego> {
                                   snapshot.data['personajes']);
                               // print("entró");
                             },
-                            child: Text('Añadir'),
+                            child: Text('Gestionar'),
                           ),
                         )
                       ],

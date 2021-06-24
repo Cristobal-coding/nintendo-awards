@@ -33,10 +33,10 @@ class _ShowByIdState extends State<ShowById> {
                   borderRadius: BorderRadius.circular(30),
                   color: nintendoPrimaryColor,
                   gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                     colors: [
-                      nintendoStar,
+                      nintendoIconsColor,
                       nintendoPrimaryColor,
                     ],
                   ),
